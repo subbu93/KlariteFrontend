@@ -1,0 +1,46 @@
+<script src="../../../model/user.ts"></script>
+<div class="my-5">
+  <form #skillForm="ngForm">
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="name">Skill Name</label>
+      <input [(ngModel)]="skill.skillName" class="form-control col-sm-5" id="name"
+             name="name"
+             required
+             type="text" placeholder="Enter skill name" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine || name.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter Skill name
+      </div>
+    </div>
+
+    <div class="form-group row description">
+      <label class="col-sm-4 text-center" for="description">Description</label>
+      <textarea [(ngModel)]="skill.description" class="form-control col-sm-5 h-100 d-inline-block" id="description"
+             name="description"  placeholder="Enter description"
+                type="text"></textarea>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="threshold">Threshold</label>
+      <input [(ngModel)]="skill.threshold" class="form-control input col-sm-5" id="threshold"
+             name="threshold"
+             placeholder="Enter threshold hours"
+             required type="number" min=0>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="skillTrainingPreRequisite">Training Prerequisite</label>
+      <select class="form-control col-sm-5" id="skillTrainingPreRequisite" required
+              [(ngModel)]="skill.trainingId" name="skillTrainingPreRequisite" >
+        <option *ngIf="!skill.trainingId" hidden value="" disabled>Select one training </option>
+        <option *ngFor="let training of trainings" [value]="training.id">{{training.trainingName}}</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="col-sm-2">
+    <button (click)="onCancel()" class="task-button text-center">Cancel</button>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="onSave()" class="btn task-button text-center add-btn"  [disabled]="!skillForm.form.valid">Save</button>
+  </div>
+</div>
