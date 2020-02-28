@@ -31,7 +31,7 @@ export class AdminTrainingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.skillService.getAllTrainings().subscribe(data => {
       this.trainings = data;
-      // console.log(data);
+      console.log(data);
     });
   }
   myClick(training: Training) {

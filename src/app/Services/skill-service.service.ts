@@ -21,8 +21,8 @@ export class SkillServiceService {
     this.getTrainingUrl = 'http://localhost:8080/skill_admin/get_all_trainings';
     this.addSkillUrl = 'http://localhost:8080/skill_admin/add_skill';
     this.deleteSkillUrl = 'http://localhost:8080/skill_admin/delete_skill';
-    this.addTrainingUrl = '';
-    this.deleteTrainingUrl = '';
+    this.addTrainingUrl = 'http://localhost:8080/skill_admin/add_training';
+    this.deleteTrainingUrl = 'http://localhost:8080/skill_admin/delete_training';
     this.getTrainersUrl = 'http://localhost:8080/skill_admin/get_trainer';
   }
   public getAllSkills(): Observable<Skill[]> {
@@ -34,7 +34,7 @@ export class SkillServiceService {
   }
 
   public addSkill(skill: Skill) {
-    const headers = {'Content-Type':  'application/json'}
+    const headers = {'Content-Type':  'application/json'};
     return this.http.post<Skill>(this.addSkillUrl, skill, {headers});
   }
 
@@ -49,7 +49,7 @@ export class SkillServiceService {
   }
 
   public addTraining(training: Training) {
-    const headers = {'Content-Type':  'application/json'}
+    const headers = {'Content-Type':  'application/json'};
     return this.http.post<Skill>(this.addTrainingUrl, training, {headers});
   }
 

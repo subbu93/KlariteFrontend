@@ -8,22 +8,36 @@
              type="text" placeholder="Enter skill name" #name="ngModel">
       <div [hidden]="name.valid || name.pristine || name.untouched"
            class="input col-sm-2 alert-danger">
-        Enter Skill name
+        Enter Training name
       </div>
     </div>
 
     <div class="form-group row description">
       <label class="col-sm-4 text-center" for="description">Description</label>
       <textarea [(ngModel)]="training.description" class="form-control col-sm-5 h-100 d-inline-block" id="description"
-                name="description"  placeholder="Enter description"
+                name="description" placeholder="Enter description"
                 type="text"></textarea>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="description">Is CE</label>
+      <div class="col-sm-2 form-check">
+        <input class="form-check-input" type="radio" value = true id="ceYes"
+               name="CE" [checked]="training.ce" (change)="training.ce=true" >
+        <label class="form-check-label" for="ceYes">Yes</label>
+      </div>
+      <div class="col-sm-2 form-check">
+        <input class="for m-check-input" type="radio" value = false id="ceNo"
+               name="CE" [checked]="!training.ce" (change)="training.ce=false">
+        <label class="form-check-label" for="ceNo">No</label>
+      </div>
     </div>
     <div class="form-group row">
       <label class="col-sm-4 text-center" for="skillTrainingPreRequisite">Trainer Name</label>
       <select class="form-control col-sm-5" id="skillTrainingPreRequisite" required
               [(ngModel)]="training.trainerId" name="skillTrainingPreRequisite">
-        <option *ngIf="!training.trainerId" hidden value="" disabled selected>Select one training </option>
-        <option *ngFor="let trainer of trainers" [value]="trainer.id">{{trainer.firstName}} {{trainer.lastName}}</option>
+        <option *ngIf="!training.trainerId" hidden value="" disabled selected>Select one training</option>
+        <option *ngFor="let trainer of trainers"
+                [value]="trainer.id">{{trainer.firstName}} {{trainer.lastName}}</option>
       </select>
     </div>
     <div class="form-group row">
@@ -40,6 +54,7 @@
     <button (click)="onCancel()" class="task-button text-center">Cancel</button>
   </div>
   <div class="col-sm-2">
-    <button (click)="onSave()" class="btn task-button text-center add-btn"  [disabled]="!trainingForm.form.valid">Save</button>
+    <button (click)="onSave()" class="btn task-button text-center add-btn" [disabled]="!trainingForm.form.valid">Save
+    </button>
   </div>
 </div>

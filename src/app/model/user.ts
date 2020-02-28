@@ -1,5 +1,5 @@
 export class User {
-  id: number;
+  id: bigint;
   ousId: number;
   firstName: string;
   middleName: string;

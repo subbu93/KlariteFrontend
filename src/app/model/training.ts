@@ -2,7 +2,7 @@ export class Training {
   id: bigint;
   trainingName: string;
   description: string;
-  isCE: boolean;
+  ce: boolean;
   ceId: number;
   trainerName: string;
   trainerId: number;

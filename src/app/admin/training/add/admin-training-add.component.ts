@@ -34,6 +34,7 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
     if (history.state.data) {
       this.training = history.state.data;
     }
+    console.log(this.training);
 
     this.skillService.getTrainers().subscribe(data => {
       this.trainers = data;
@@ -47,19 +48,19 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-    console.log(this.trainers);
-    // this.skillService.addTraining(this.training)
-    //   .subscribe(response => {
-    //     // debugger;
-    //     console.log('response: ' + response);
-    //   }, (err: HttpErrorResponse) => {
-    //     if (err.status === 201){
-    //       this.router.navigateByUrl('/admin-training');
-    //     } else {
-    //       this.toastr.error('Cannot store data');
-    //     }
-    //     console.log(err);
-    //   });
+    // console.log(this.training);
+    this.skillService.addTraining(this.training)
+      .subscribe(response => {
+        // debugger;
+        console.log('response: ' + response);
+      }, (err: HttpErrorResponse) => {
+        if (err.status === 201) {
+          this.router.navigateByUrl('/admin-training');
+        } else {
+          this.toastr.error('Cannot store data');
+        }
+        console.log(err);
+      });
   }
 
   onCancel() {
