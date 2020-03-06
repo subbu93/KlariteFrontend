@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminTrainingComponent } from './admin/training/home/admin-training.component';
 import { AdminTrainingAddComponent } from './admin/training/add/admin-training-add.component';
+import { ContactHoursComponent } from './admin/contact-hours/contact-hours.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AdminTrainingAddComponent } from './admin/training/add/admin-training-a
     AdminSkillComponent,
     AdminSkillAddComponent,
     AdminTrainingComponent,
-    AdminTrainingAddComponent
+    AdminTrainingAddComponent,
+    ContactHoursComponent
   ],
   imports: [
     BrowserModule,

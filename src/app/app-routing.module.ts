@@ -7,6 +7,7 @@ import {AdminSkillComponent} from './admin/skill/home/admin-skill.component';
 import {AdminSkillAddComponent} from './admin/skill/add/admin-skill-add.component';
 import {AdminTrainingComponent} from './admin/training/home/admin-training.component';
 import {AdminTrainingAddComponent} from './admin/training/add/admin-training-add.component';
+import {ContactHoursComponent} from './admin/contact-hours/contact-hours.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -14,9 +15,8 @@ const routes: Routes = [
   { path: 'admin-skill', component: AdminSkillComponent},
   {path: 'admin-skill-add', component: AdminSkillAddComponent},
   {path: 'admin-training', component: AdminTrainingComponent},
-  {path: 'admin-training-add', component: AdminTrainingAddComponent}
-  // { path: 'about', component: AboutComponent },
-  // {path: 'getname', component: NameListComponent}
+  {path: 'admin-training-add', component: AdminTrainingAddComponent},
+  {path: 'admin-ce', component: ContactHoursComponent}
 ];
 
 @NgModule({

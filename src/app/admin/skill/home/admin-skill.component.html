@@ -1,8 +1,8 @@
-<div class="my-5">
-  <div class="row d-flex justify-content">
+<div class="my-5 max_height_list over_flow">
+  <div class="row justify-content padding-top-40">
     <div *ngFor="let skill of skills" class="d-flex justify-content-center col-sm-3">
-      <div (click)="myClick(skill)" [class.highlight]="skill.isSelected"
-           class="border-round-corners margin-bottom-40 select">
+      <div (click)="myClick(skill)" [class.highlight]="skill.isSelected" ngbTooltip="{{skill.skillName}}"
+           class="border-round-corners margin-bottom-40 select box-setting">
         {{skill.skillName}}
       </div>
     </div>

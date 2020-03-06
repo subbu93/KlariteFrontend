@@ -1,0 +1,47 @@
+<div class="my-5">
+  <form #ceForm="ngForm">
+      <div class="form-group row">
+        <label class="col-sm-4 text-center" for="stateSelection">State</label>
+        <select class="form-control col-sm-5" id="stateSelection" required
+                (change)="getCeHours()"
+                [(ngModel)]="ce.state" name="skillTrainingPreRequisite">
+          <option *ngFor="let state of states"
+                  [value]="state">{{state}}</option>
+        </select>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 text-center" for="titleSelection">Title</label>
+        <select class="form-control col-sm-5" id="titleSelection" required
+                (change)="getCeHours()"
+                [(ngModel)]="ce.userTitle" name="skillTrainingPreRequisite">
+          <option *ngFor="let title of titles"
+                  [value]="title">{{title}}</option>
+        </select>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 text-center" for="positionSelection">Position</label>
+        <select class="form-control col-sm-5" id="positionSelection" required
+                (change)="getCeHours()"
+                [(ngModel)]="ce.position" name="skillTrainingPreRequisite">
+          <option *ngFor="let position of positions"
+                  [value]="position">{{position}}</option>
+        </select>
+      </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="threshold">Contact hours per year</label>
+      <input [(ngModel)]="ce.ceHrsPerYear" class="form-control input col-sm-5" id="threshold"
+             name="threshold"
+             placeholder="Enter threshold hours"
+             required type="number" min=0>
+    </div>
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="col-sm-2">
+    <button (click)="onCancel()" class="task-button text-center">Cancel</button>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="onSave()" class="btn task-button text-center add-btn" [disabled]="!ceForm.form.valid">Save
+    </button>
+  </div>
+</div>

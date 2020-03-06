@@ -43,9 +43,8 @@
         <div ngbDropdownMenu class = "bg-dark no-border">
           <button ngbDropdownItem [routerLink]="['admin-skill']" class = "bg-dark text-light">Skills</button>
           <button ngbDropdownItem [routerLink]="['admin-training']" class = "bg-dark text-light">Training</button>
-<!--          <button ngbDropdownItem class = "bg-dark text-light">Training</button>-->
           <button ngbDropdownItem class = "bg-dark text-light">Certification</button>
-          <button ngbDropdownItem class = "bg-dark text-light">CE</button>
+          <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">CE</button>
         </div>
       </li>
     </ul>

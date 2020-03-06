@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AppComponent} from '../../../app.component';
-import {SkillServiceService} from '../../../Services/skill-service.service';
+import {AdminServiceService} from '../../../Services/admin-service.service';
 import {Skill} from '../../../model/skill';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -9,27 +9,29 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-admin-skill',
   templateUrl: './admin-skill.component.html',
-  styleUrls: ['./admin-skill.component.css', '../../../app.component.css']
+  styleUrls: ['./admin-skill.component.css', '../../../app.component.css', '../../admin.component.css']
 })
 export class AdminSkillComponent implements OnInit, OnDestroy {
   skills: Skill[];
   navigationSubscription;
   selected: Skill = null;
-  constructor(private skillService: SkillServiceService,
+  constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
               private toastr: ToastrService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initialize the component
       if (e instanceof NavigationEnd && e.url === '/admin-skill') {
+        appComponent.previousUrl = appComponent.currentUrl;
+        appComponent.currentUrl = e.url;
         appComponent.title = 'Admin - Skill';
-        console.log('Admin- skills');
+        console.log(appComponent.previousUrl);
       }
     });
   }
 
   ngOnInit() {
-    this.skillService.getAllSkills().subscribe(data => {
+    this.adminService.getAllSkills().subscribe(data => {
       this.skills = data;
       // console.log(data);
     });
@@ -63,7 +65,7 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
 
   onDelete() {
     if (this.selected) {
-      this.skillService.deleteSkill(this.selected)
+      this.adminService.deleteSkill(this.selected)
         .subscribe(
           (val) => {
             console.log(val);

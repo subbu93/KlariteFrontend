@@ -1,0 +1,24 @@
+.max_height_list{
+  max-height: 500px;
+}
+
+.over_flow{
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.border-round-corners{
+  padding: .75rem 1.25rem;
+  border-radius: 9px;
+  border: 0.4px solid #394052;
+}
+.box-setting{
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 70px;
+  line-height: 35px;
+  width: 160px;
+  text-align: center;
+}

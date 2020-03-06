@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Training} from '../../../model/training';
-import {SkillServiceService} from '../../../Services/skill-service.service';
+import {AdminServiceService} from '../../../Services/admin-service.service';
 import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -9,27 +9,29 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-admin-training',
   templateUrl: './admin-training.component.html',
-  styleUrls: ['./admin-training.component.css', '../../../app.component.css']
+  styleUrls: ['./admin-training.component.css', '../../../app.component.css', '../../admin.component.css']
 })
 export class AdminTrainingComponent implements OnInit, OnDestroy {
   trainings: Training[];
   navigationSubscription;
   selected: Training = null;
-  constructor(private skillService: SkillServiceService,
+  constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
               private toastr: ToastrService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initialize the component
       if (e instanceof NavigationEnd && e.url === '/admin-training') {
+        appComponent.previousUrl = appComponent.currentUrl;
+        appComponent.currentUrl = e.url;
         appComponent.title = 'Admin - Training';
-        console.log('Admin- Training');
+        console.log(appComponent.previousUrl);
       }
     });
   }
 
   ngOnInit(): void {
-    this.skillService.getAllTrainings().subscribe(data => {
+    this.adminService.getAllTrainings().subscribe(data => {
       this.trainings = data;
       console.log(data);
     });
@@ -62,7 +64,7 @@ export class AdminTrainingComponent implements OnInit, OnDestroy {
 
   onDelete() {
     if (this.selected) {
-      this.skillService.deleteTraining(this.selected)
+      this.adminService.deleteTraining(this.selected)
         .subscribe(
           (val) => {
             console.log(val);

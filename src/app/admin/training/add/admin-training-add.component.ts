@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Skill} from '../../../model/skill';
 import {Training} from '../../../model/training';
-import {SkillServiceService} from '../../../Services/skill-service.service';
+import {AdminServiceService} from '../../../Services/admin-service.service';
 import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -18,13 +18,15 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
   training: Training = new Training();
   trainers: User[];
   trainerId = '';
-  constructor(private skillService: SkillServiceService,
+  constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
               private toastr: ToastrService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd && e.url === '/admin-training-add') {
+        appComponent.previousUrl = appComponent.currentUrl;
+        appComponent.currentUrl = e.url;
         appComponent.title = 'Admin - Training';
       }
     });
@@ -36,7 +38,7 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
     }
     console.log(this.training);
 
-    this.skillService.getTrainers().subscribe(data => {
+    this.adminService.getTrainers().subscribe(data => {
       this.trainers = data;
     });
   }
@@ -49,7 +51,7 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
 
   onSave() {
     // console.log(this.training);
-    this.skillService.addTraining(this.training)
+    this.adminService.addTraining(this.training)
       .subscribe(response => {
         // debugger;
         console.log('response: ' + response);
@@ -64,6 +66,6 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.router.navigateByUrl('/admin-training');
+    this.router.navigateByUrl(this.appComponent.previousUrl);
   }
 }

@@ -10,18 +10,23 @@ export class AppComponent implements OnInit, OnDestroy {
   public title: string;
   navbarOpen = false;
   navigationSubscription;
+  public previousUrl: string = undefined;
+  public currentUrl: string = undefined;
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
   constructor(private router: Router) {
+    this.currentUrl = this.router.url;
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initialize the component
       if (e instanceof NavigationEnd && e.url === '/home') {
-        this.initialiseInvites();
+        this.initializeInvites();
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = e.url;
       }
     });
   }
-  initialiseInvites() {
+  initializeInvites() {
     this.title = 'DASHBOARD';
   }
 

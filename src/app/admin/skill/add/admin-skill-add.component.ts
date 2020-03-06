@@ -3,7 +3,7 @@ import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {Skill} from '../../../model/skill';
 import {Training} from '../../../model/training';
-import {SkillServiceService} from '../../../Services/skill-service.service';
+import {AdminServiceService} from '../../../Services/admin-service.service';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
 
@@ -18,14 +18,17 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
   trainings: Training[];
   // trainingId = '';
 
-  constructor(private skillService: SkillServiceService,
+  constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
               private toastr: ToastrService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd && e.url === '/admin-skill') {
+      if (e instanceof NavigationEnd && e.url === '/admin-skill-add') {
+        appComponent.previousUrl = appComponent.currentUrl;
+        appComponent.currentUrl = e.url;
         appComponent.title = 'Admin - Skill';
+        console.log(appComponent.previousUrl);
       }
     });
   }
@@ -34,7 +37,7 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
     if (history.state.data) {
       this.skill = history.state.data;
     }
-    this.skillService.getAllTrainings().subscribe(data => {
+    this.adminService.getAllTrainings().subscribe(data => {
       this.trainings = data;
     });
   }
@@ -45,7 +48,7 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-    this.skillService.addSkill(this.skill)
+    this.adminService.addSkill(this.skill)
       .subscribe(response => {
         // debugger;
         console.log('response: ' + response);
@@ -60,6 +63,6 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.router.navigateByUrl('/admin-skill');
+    this.router.navigateByUrl(this.appComponent.previousUrl);
   }
 }
