@@ -12,6 +12,10 @@ html, body {
   padding-left: 10px;
 }
 
+.no-padding {
+  padding: 0 !important;
+}
+
 
 .select{
   cursor: pointer;

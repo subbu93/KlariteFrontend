@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AdminServiceService} from '../../Services/admin-service.service';
+import {AdminServiceService} from '../../services/admin-service.service';
 import {AppComponent} from '../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AppComponent} from '../../../app.component';
-import {AdminServiceService} from '../../../Services/admin-service.service';
+import {AdminServiceService} from '../../../services/admin-service.service';
 import {Skill} from '../../../model/skill';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';

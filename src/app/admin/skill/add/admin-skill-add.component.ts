@@ -3,7 +3,7 @@ import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {Skill} from '../../../model/skill';
 import {Training} from '../../../model/training';
-import {AdminServiceService} from '../../../Services/admin-service.service';
+import {AdminServiceService} from '../../../services/admin-service.service';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
 
