@@ -7,7 +7,9 @@ import {AdminTrainingComponent} from './admin/training/home/admin-training.compo
 import {AdminTrainingAddComponent} from './admin/training/add/admin-training-add.component';
 import {ContactHoursComponent} from './admin/contact-hours/contact-hours.component';
 import {SkillAssignmentComponent} from './skill/assignemnt/skill-assignment/home/skill-assignment.component';
-import {SkillAssignmentAddComponent} from './skill/assignemnt/skill-assignment/add/skill-assignment-add/skill-assignment-add.component';
+import {SkillAssignmentAddComponent} from './skill/assignemnt/skill-assignment/add/skill-assignment-add.component';
+import {TrainingAssignmentComponent} from './training/assignment/training-assignment/home/training-assignment.component';
+import {TrainingAssignmentAddComponent} from './training/assignment/training-assignment/add/training-assignment-add.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'admin-training-add', component: AdminTrainingAddComponent},
   { path: 'admin-ce', component: ContactHoursComponent},
   { path: 'skill-assignment', component: SkillAssignmentComponent},
-  { path: 'skill-assignment-add', component: SkillAssignmentAddComponent}
+  { path: 'skill-assignment-add', component: SkillAssignmentAddComponent},
+  { path: 'training-assignment', component: TrainingAssignmentComponent},
+  { path: 'training-assignment-add', component: TrainingAssignmentAddComponent}
 ];
 
 @NgModule({

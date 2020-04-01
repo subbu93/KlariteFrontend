@@ -1,7 +1,7 @@
 export class SkillAssignment {
   assignmentId: number;
   skillId: number;
-  userIds: bigint[];
+  assignedUserIds: bigint[];
   skillAssignmentName: string;
   costCenterId: number;
   skillValidatorId: number;

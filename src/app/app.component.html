@@ -1,6 +1,5 @@
 <div class = "row justify-content-center align-items-center margin-right">
   <div class="col-md-5">
-    <!--    <a class="navbar-item" href="./home">-->
     <a class="navbar-item" [routerLink]="['/home']">
       <img src="assets/img/logo.png">
     </a>
@@ -19,23 +18,23 @@
         <a href (click)="false" class="nav-link" ngbDropdownToggle>Skills</a>
         <div ngbDropdownMenu class = "bg-dark no-border">
           <button ngbDropdownItem [routerLink]="['skill-assignment']" class = "bg-dark text-light">Assignment</button>
-          <button ngbDropdownItem class = "bg-dark text-light">Analysis</button>
-          <button ngbDropdownItem class = "bg-dark text-light">Validation</button>
-          <button ngbDropdownItem class = "bg-dark text-light">Report</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Analysis</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Validation</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Report</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item dropdown">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>Training</a>
         <div ngbDropdownMenu class = "bg-dark no-border">
-          <button ngbDropdownItem class = "bg-dark text-light">Assignment</button>
-          <button ngbDropdownItem class = "bg-dark text-light">Report</button>
+          <button ngbDropdownItem [routerLink]="['training-assignment']" class = "bg-dark text-light">Assignment</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Report</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item dropdown">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>Certification</a>
         <div ngbDropdownMenu class = "bg-dark no-border">
-          <button ngbDropdownItem class = "bg-dark text-light">CE/Reports</button>
-          <button ngbDropdownItem class = "bg-dark text-light">Search</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">CE/Reports</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Search</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item dropdown">
@@ -43,8 +42,9 @@
         <div ngbDropdownMenu class = "bg-dark no-border">
           <button ngbDropdownItem [routerLink]="['admin-skill']" class = "bg-dark text-light">Skills</button>
           <button ngbDropdownItem [routerLink]="['admin-training']" class = "bg-dark text-light">Training</button>
-          <button ngbDropdownItem class = "bg-dark text-light">Certification</button>
-          <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">CE</button>
+          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Certification</button>
+<!--          <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">CE</button>-->
+          <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">Contact Hours</button>
         </div>
       </li>
     </ul>

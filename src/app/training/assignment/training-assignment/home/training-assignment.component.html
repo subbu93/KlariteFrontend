@@ -1,0 +1,28 @@
+<div class="my-5 max_height_list over_flow">
+  <div class="row justify-content padding-top-40">
+    <div *ngFor="let assignment of assignments" class="d-flex justify-content-center col-sm-3">
+      <div (click)="myClick(assignment)" [class.highlight]="assignment.isSelected"
+           ngbTooltip="{{assignment.trainingAssignmentName}}"
+           class="border-round-corners margin-bottom-40 select box-setting">
+        {{assignment.trainingAssignmentName}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="col-sm-2">
+    <a [href]="href" (click)="onGenerateQRCode()" download>
+      <button (click)="onGenerateQRCode()" class="task-button text-center">QR Code</button>
+    </a>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="onDelete()" class="task-button text-center">Delete</button>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="onEdit()" class="task-button text-center">Edit</button>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="onAdd()" class="task-button text-center add-btn">Add Training</button>
+  </div>
+</div>
+<qrcode hidden [qrdata]="qrdata" [width]="512" [errorCorrectionLevel]="'M'" [elementType]="'img'"></qrcode>

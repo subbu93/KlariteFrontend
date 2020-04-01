@@ -33,7 +33,6 @@ export class AdminTrainingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.adminService.getAllTrainings().subscribe(data => {
       this.trainings = data;
-      console.log(data);
     });
   }
   myClick(training: Training) {
@@ -71,7 +70,9 @@ export class AdminTrainingComponent implements OnInit, OnDestroy {
           },
           (response: HttpErrorResponse) => {
             if (response.status === 200) {
-              window.location.reload();
+              this.adminService.getAllTrainings().subscribe(data => {
+                this.trainings = data;
+              });
             } else {
               this.toastr.error('Could not delete data');
             }

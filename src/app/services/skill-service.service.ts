@@ -3,6 +3,7 @@ import {SkillAssignment} from '../model/skill-assignment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../model/user';
 import {CostCenter} from '../model/cost-center';
+import {BusinessUnit} from '../model/business-unit';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class SkillServiceService {
   private getAllUsersUrl: string;
   private getCostCentersUrl: string;
   private addSkillAssignmentUrl: string;
+  private getBusinessUnitsUrl: string;
 
   constructor(private http: HttpClient) {
     this.getAllAssignmentsUrl = 'http://localhost:8080/assign_skill/get_assigned_skills';
@@ -20,6 +22,7 @@ export class SkillServiceService {
     this.getAllUsersUrl = 'http://localhost:8080/user_services/get_all_users';
     this.getCostCentersUrl = 'http://localhost:8080/assign_skill/get_cost_centers';
     this.addSkillAssignmentUrl = 'http://localhost:8080/assign_skill/add_skill_assignment';
+    this.getBusinessUnitsUrl = 'http://localhost:8080/assign_skill/get_business_units';
   }
 
   deleteAssignment(selected: SkillAssignment) {
@@ -45,5 +48,9 @@ export class SkillServiceService {
     console.log(assignment);
     const headers = {'Content-Type': 'application/json'};
     return this.http.post(this.addSkillAssignmentUrl, assignment, {headers});
+  }
+
+  getBusinessUnits() {
+    return this.http.get<BusinessUnit[]>(this.getBusinessUnitsUrl);
   }
 }

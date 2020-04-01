@@ -15,8 +15,11 @@ import {AdminTrainingComponent} from './admin/training/home/admin-training.compo
 import {AdminTrainingAddComponent} from './admin/training/add/admin-training-add.component';
 import {ContactHoursComponent} from './admin/contact-hours/contact-hours.component';
 import {SkillAssignmentComponent} from './skill/assignemnt/skill-assignment/home/skill-assignment.component';
-import {SkillAssignmentAddComponent} from './skill/assignemnt/skill-assignment/add/skill-assignment-add/skill-assignment-add.component';
+import {SkillAssignmentAddComponent} from './skill/assignemnt/skill-assignment/add/skill-assignment-add.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import { TrainingAssignmentComponent } from './training/assignment/training-assignment/home/training-assignment.component';
+import { TrainingAssignmentAddComponent } from './training/assignment/training-assignment/add/training-assignment-add.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     ContactHoursComponent,
     SkillAssignmentComponent,
     SkillAssignmentAddComponent,
+    TrainingAssignmentComponent,
+    TrainingAssignmentAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,8 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

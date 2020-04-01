@@ -1,0 +1,98 @@
+<div class="my-5">
+  <form #skillForm="ngForm">
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="name">Assignment Name</label>
+      <input [(ngModel)]="assignment.trainingAssignmentName" class="form-control col-sm-5" id="name"
+             name="name"
+             required
+             type="text" placeholder="Enter skill name" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine || name.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter assignment name
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="businessUnit">Business Unit</label>
+      <select class="form-control col-sm-5" id="businessUnit" required
+              [(ngModel)]="assignment.businessUnitId" name="costCenter" (change)="onChangeBusinessUnit()">
+        <option *ngFor="let businessUnit of businessUnits" [value]="businessUnit.id">
+          {{businessUnit.businessUnitName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="costCenter">Cost Center</label>
+      <select class="form-control col-sm-5" id="costCenter" required
+              [(ngModel)]="assignment.costCenterId" name="costCenter" (change)="onChangeCostCenter()">
+        <option *ngIf="!assignment.costCenterId" hidden value="" disabled>Select one training</option>
+        <option *ngFor="let costCenter of costCenters" [value]="costCenter.id">{{costCenter.costCenterName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center">Add Participants</label>
+      <span class="col-sm-5 no-padding">
+      <ng-multiselect-dropdown #multiSelect
+                               [placeholder]=""
+                               [formControl]="f.name"
+                               [data]="usersList"
+                               [settings]="dropdownSettings"
+                               (onSelect)="onItemSelect($event)"
+                               (onDeSelect)="OnItemDeSelect($event)"
+                               (onSelectAll)="onSelectAll($event)"
+                               (onDeSelectAll)="onDeSelectAll($event)">
+      </ng-multiselect-dropdown>
+      </span>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="skill">Select Training</label>
+      <select class="form-control col-sm-5" id="skill" required
+              [(ngModel)]="assignment.trainingId" name="skill">
+        <option *ngIf="!assignment.trainingId" hidden value="" disabled>Select one training</option>
+        <option *ngFor="let training of trainings" [value]="training.id">{{training.trainingName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+
+      <label class="col-sm-4 text-center" for="name">Start Date</label>
+      <input [(ngModel)]="assignment.date" class="form-control col-sm-5" id="date"
+             name="date"
+             required
+             type="date" placeholder="Choose Date">
+    </div>
+    <div class="form-group row">
+
+      <label class="col-sm-4 text-center" for="name">Start Time</label>
+      <input [(ngModel)]="assignment.startTime" class="form-control col-sm-5" id="time"
+             name="time"
+             step="1"
+             required
+             id = time
+             (ngModelChange)="updateTime($event)"
+             type="time" placeholder="Choose time">
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="name">Location</label>
+      <input [(ngModel)]="assignment.location" class="form-control col-sm-5" id="location"
+             name="location"
+             required
+             type="text" placeholder="Enter Location" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine || name.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter location name
+      </div>
+    </div>
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="col-sm-2">
+    <button (click)="onCancel()" class="task-button text-center">Cancel</button>
+  </div>
+  <div class="col-sm-2">
+<!--    <button (click)="onSave()" class="btn task-button text-center add-btn" [disabled]="!skillForm.form.valid">Save-->
+    <button (click)="onSave()" class="btn task-button text-center add-btn">Save
+    </button>
+  </div>
+</div>
