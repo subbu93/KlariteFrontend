@@ -38,7 +38,7 @@ export class SkillServiceService {
   public getAllAssignments() {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         token: this.authenticationService.currentUserValue.token
       })
     };

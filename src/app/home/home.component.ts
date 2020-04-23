@@ -9,6 +9,7 @@ import {NavigationEnd, Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   navigationSubscription;
+
   constructor(private appComponent: AppComponent,
               private router: Router) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {

@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {SkillAssignment} from '../model/skill-assignment';
 import {TrainingAssignment} from '../model/training-assignment';
 import {User} from '../model/user';
 import {environment} from '../../environments/environment';
@@ -13,6 +12,7 @@ export class TrainingServiceService {
   deleteAssignmentsUrl: string;
   addTrainingAssignmentUrl: string;
   getAttendanceListUrl: string;
+
   constructor(private http: HttpClient) {
     this.getAllAssignmentsUrl = `${environment.apiUrl}/assign_training/get_assigned_trainings`;
     this.deleteAssignmentsUrl = `${environment.apiUrl}/assign_training/delete_assigned_training`;

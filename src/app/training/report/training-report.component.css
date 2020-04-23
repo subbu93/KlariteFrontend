@@ -1,4 +1,4 @@
-.search-list{
+.search-list {
   overflow: hidden;
   word-break: break-word;
   text-overflow: ellipsis;
@@ -7,6 +7,7 @@
   height: 100%;
   text-align: left;
 }
+
 .background-color-custom {
   background-color: #76BDAB;
   color: white;

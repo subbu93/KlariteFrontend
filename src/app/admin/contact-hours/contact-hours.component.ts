@@ -70,7 +70,8 @@ export class ContactHoursComponent implements OnInit, OnDestroy {
 
   getCeHours() {
     console.log('getCeHours');
-    if (this.ce.position != undefined  && this.ce.state != undefined && this.ce.userTitle != undefined) {
+    // tslint:disable-next-line:triple-equals
+    if (this.ce.position != undefined && this.ce.state != undefined && this.ce.userTitle != undefined) {
       this.adminService.getCeHours(this.ce).subscribe((data: ContactHours) => {
         console.log(data);
         if (data != null) {

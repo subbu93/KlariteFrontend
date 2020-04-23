@@ -16,6 +16,7 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
   navigationSubscription;
   skill: Skill = new Skill();
   trainings: Training[];
+
   // trainingId = '';
 
   constructor(private adminService: AdminServiceService,
@@ -23,7 +24,7 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
               private router: Router,
               private toastr: ToastrService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
+      // If it is a NavigationEnd event re-initialize the component
       if (e instanceof NavigationEnd && e.url === '/admin-skill-add') {
         appComponent.previousUrl = appComponent.currentUrl;
         appComponent.currentUrl = e.url;
@@ -41,6 +42,7 @@ export class AdminSkillAddComponent implements OnInit, OnDestroy {
       this.trainings = data;
     });
   }
+
   ngOnDestroy(): void {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();

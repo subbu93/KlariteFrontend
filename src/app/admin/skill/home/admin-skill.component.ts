@@ -15,6 +15,7 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
   skills: Skill[];
   navigationSubscription;
   selected: Skill = null;
+
   constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
@@ -39,7 +40,7 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
 
   myClick(skill: Skill) {
     const state = skill.isSelected;
-    this.skills.forEach( (element) => {
+    this.skills.forEach((element) => {
       element.isSelected = false;
     });
     skill.isSelected = !state;
@@ -83,6 +84,7 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
       this.toastr.error('Select a Skill to delete');
     }
   }
+
   ngOnDestroy(): void {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();

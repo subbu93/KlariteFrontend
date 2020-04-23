@@ -69,7 +69,7 @@
              name="time"
              step="1"
              required
-             id = time
+             id=time
              (ngModelChange)="updateTime($event)"
              type="time" placeholder="Choose time">
     </div>
@@ -93,7 +93,7 @@
   <div class="col-sm-2">
     <button (click)="onSave()" class="btn task-button text-center add-btn"
             [disabled]="!trainingAssignmentForm.form.valid && !dropdownRequiredField">Save
-<!--    <button (click)="onSave()" class="btn task-button text-center add-btn">Save-->
+      <!--    <button (click)="onSave()" class="btn task-button text-center add-btn">Save-->
     </button>
   </div>
 </div>

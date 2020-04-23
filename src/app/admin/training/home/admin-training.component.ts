@@ -15,6 +15,7 @@ export class AdminTrainingComponent implements OnInit, OnDestroy {
   trainings: Training[];
   navigationSubscription;
   selected: Training = null;
+
   constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
@@ -35,9 +36,10 @@ export class AdminTrainingComponent implements OnInit, OnDestroy {
       this.trainings = data;
     });
   }
+
   myClick(training: Training) {
     const state = training.isSelected;
-    this.trainings.forEach( (element) => {
+    this.trainings.forEach((element) => {
       element.isSelected = false;
     });
     training.isSelected = !state;

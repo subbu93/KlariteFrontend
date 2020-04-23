@@ -23,6 +23,7 @@ export class AdminServiceService {
   getCeHour: string;
   getUsersUrl: string;
   createUserUrl: string;
+
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationServiceService) {
     this.getSkillsUrl = `${environment.apiUrl}/skill_admin/get_all_skills`;
@@ -37,10 +38,11 @@ export class AdminServiceService {
     this.getUsersUrl = `${environment.apiUrl}/user_services/get_all_users`;
     this.createUserUrl = `${environment.apiUrl}/user_services/add_user`;
   }
+
   public getAllSkills(): Observable<Skill[]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         token: this.authenticationService.currentUserValue.token
       })
     };
@@ -52,7 +54,7 @@ export class AdminServiceService {
   }
 
   public addSkill(skill: Skill) {
-    const headers = {'Content-Type':  'application/json'};
+    const headers = {'Content-Type': 'application/json'};
     return this.http.post<Skill>(this.addSkillUrl, skill, {headers});
   }
 
@@ -67,7 +69,7 @@ export class AdminServiceService {
   }
 
   public addTraining(training: Training) {
-    const headers = {'Content-Type':  'application/json'};
+    const headers = {'Content-Type': 'application/json'};
     return this.http.post<Skill>(this.addTrainingUrl, training, {headers});
   }
 
@@ -76,7 +78,7 @@ export class AdminServiceService {
   }
 
   public addCe(ce: ContactHours) {
-    const headers = {'Content-Type':  'application/json'};
+    const headers = {'Content-Type': 'application/json'};
     return this.http.post<Skill>(this.addCeUrl, ce, {headers});
   }
 
@@ -88,7 +90,7 @@ export class AdminServiceService {
   getAllUsers() {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         token: this.authenticationService.currentUserValue.token
       })
     };
@@ -98,11 +100,11 @@ export class AdminServiceService {
   createUser(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         token: this.authenticationService.currentUserValue.token
       })
     };
     console.log(user);
-    return this.http.post<User>(this.createUserUrl, user, httpOptions );
+    return this.http.post<User>(this.createUserUrl, user, httpOptions);
   }
 }

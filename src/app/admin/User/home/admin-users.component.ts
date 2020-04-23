@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../model/user';
 import {AdminServiceService} from '../../../services/admin-service.service';
 import {AppComponent} from '../../../app.component';
@@ -58,11 +58,11 @@ export class AdminUsersComponent implements OnInit {
   }
 
   onDelete() {
-  //  Call to delete User
+    //  Call to delete User
   }
 
   onEdit() {
-  //  Edit user
+    //  Edit user
     if (this.selectedUser) {
       console.log('selected');
       this.router.navigateByUrl('/admin-users-add', {state: {data: this.selectedUser[0]}});
@@ -72,7 +72,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   onAdd() {
-  //  Add a new User
+    //  Add a new User
     this.router.navigateByUrl('/admin-users-add');
   }
 }

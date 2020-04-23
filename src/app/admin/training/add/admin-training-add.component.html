@@ -21,12 +21,12 @@
     <div class="form-group row">
       <label class="col-sm-4 text-center" for="description">Is CE</label>
       <div class="col-sm-2 form-check">
-        <input class="form-check-input" type="radio" value = true id="ceYes"
-               name="CE" [checked]="training.ce" (change)="training.ce=true" >
+        <input class="form-check-input" type="radio" value=true id="ceYes"
+               name="CE" [checked]="training.ce" (change)="training.ce=true">
         <label class="form-check-label" for="ceYes">Yes</label>
       </div>
       <div class="col-sm-2 form-check">
-        <input class="for m-check-input" type="radio" value = false id="ceNo"
+        <input class="for m-check-input" type="radio" value=false id="ceNo"
                name="CE" [checked]="!training.ce" (change)="training.ce=false">
         <label class="form-check-label" for="ceNo">No</label>
       </div>

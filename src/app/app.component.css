@@ -4,11 +4,11 @@ html, body {
   margin: 0;
 }
 
-.margin-bottom-40{
+.margin-bottom-40 {
   margin-bottom: 40px;
 }
 
-.padding-left{
+.padding-left {
   padding-left: 10px;
 }
 
@@ -17,7 +17,7 @@ html, body {
 }
 
 
-.select{
+.select {
   cursor: pointer;
 }
 
@@ -35,20 +35,21 @@ html, body {
   background-color: #394052;
   color: white;
 }
+
 .add-btn:enabled {
   background-color: #76BDAB;
   color: white;
 }
 
-.margin-top-40{
+.margin-top-40 {
   margin-top: 40px;
 }
 
-.padding-top-40{
+.padding-top-40 {
   padding-top: 40px;
 }
 
-.box-setting{
+.box-setting {
   overflow: hidden;
   word-break: break-word;
   text-overflow: ellipsis;

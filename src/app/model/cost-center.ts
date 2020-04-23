@@ -1,4 +1,4 @@
 export class CostCenter {
-  id: number
+  id: number;
   costCenterName: string;
 }

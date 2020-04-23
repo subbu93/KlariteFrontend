@@ -17,14 +17,14 @@ import {ContactHoursComponent} from './admin/contact-hours/contact-hours.compone
 import {SkillAssignmentComponent} from './skill/assignemnt/home/skill-assignment.component';
 import {SkillAssignmentAddComponent} from './skill/assignemnt/add/skill-assignment-add.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import { TrainingAssignmentComponent } from './training/assignment/home/training-assignment.component';
-import { TrainingAssignmentAddComponent } from './training/assignment/add/training-assignment-add.component';
-import { QRCodeModule } from 'angularx-qrcode';
-import { TrainingReportComponent } from './training/report/training-report.component';
-import { LoginComponent } from './login/login.component';
+import {TrainingAssignmentComponent} from './training/assignment/home/training-assignment.component';
+import {TrainingAssignmentAddComponent} from './training/assignment/add/training-assignment-add.component';
+import {QRCodeModule} from 'angularx-qrcode';
+import {TrainingReportComponent} from './training/report/training-report.component';
+import {LoginComponent} from './login/login.component';
 import {Md5} from 'ts-md5/dist/md5';
-import { AdminUsersComponent } from './admin/User/home/admin-users.component';
-import { AdminUsersAddComponent } from './admin/User/add/admin-users-add.component';
+import {AdminUsersComponent} from './admin/User/home/admin-users.component';
+import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component';
 
 @NgModule({
   declarations: [

@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthenticationServiceService} from './services/authentication-service.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {LoginComponent} from './login/login.component';
 import {Roles} from './model/roles.enum';
 
 @Component({
@@ -21,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showAssignment = true;
   showAdmin = true;
   showValidation = true;
+
   constructor(private router: Router,
               private authenticationService: AuthenticationServiceService) {
     this.currentUrl = this.router.url;
@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   initializeInvites() {
     this.title = 'DASHBOARD';
   }
@@ -62,10 +63,12 @@ export class AppComponent implements OnInit, OnDestroy {
         if (response.status === 200) {
           localStorage.removeItem('currentUser');
         }
-      });;
+      });
+    ;
     this.router.navigateByUrl('/login');
     this.login = false;
   }
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }

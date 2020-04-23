@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SkillAssignment} from '../../../model/skill-assignment';
 import {User} from '../../../model/user';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {CostCenter} from '../../../model/cost-center';
-import {Skill} from '../../../model/skill';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AdminServiceService} from '../../../services/admin-service.service';
 import {SkillServiceService} from '../../../services/skill-service.service';
@@ -15,7 +13,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {TrainingAssignment} from '../../../model/training-assignment';
 import {BusinessUnit} from '../../../model/business-unit';
 import {TrainingServiceService} from '../../../services/training-service.service';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-training-assignment-add',

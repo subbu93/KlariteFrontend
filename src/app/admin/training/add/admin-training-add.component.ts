@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Skill} from '../../../model/skill';
 import {Training} from '../../../model/training';
 import {AdminServiceService} from '../../../services/admin-service.service';
 import {AppComponent} from '../../../app.component';
@@ -19,6 +18,7 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
   training: Training = new Training();
   trainers: User[];
   trainerId = '';
+
   constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,

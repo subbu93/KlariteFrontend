@@ -5,22 +5,23 @@
     </div>
     <div class="row margin-top-2">
       <div class="col-sm-6">
-        <div class = "row">
+        <div class="row">
           <div class="col-sm-12">
             <div class="row d-flex float-md-right padding-right-5">
-<!--              <ul class="list-group search-list max_height_list over_flow" id="myList">-->
-                <i class="fas fa-search" aria-hidden="true"></i>
-                                <input class="form-control form-control-sm w-100"
-                                       (input)="searchAttended($event.target.value)"
-                                       type="text" placeholder="Search"
-                                       aria-label="Search">
+              <!--              <ul class="list-group search-list max_height_list over_flow" id="myList">-->
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input class="form-control form-control-sm w-100"
+                     (input)="searchAttended($event.target.value)"
+                     type="text" placeholder="Search"
+                     aria-label="Search">
               <select class="form-control w-100" name="user" multiple [(ngModel)]="selectedUser">
-                <option *ngFor="let user of filteredItems" [value]="user">{{user.firstName + ' ' + user.lastName}}</option>
+                <option *ngFor="let user of filteredItems"
+                        [value]="user">{{user.firstName + ' ' + user.lastName}}</option>
               </select>
 
               <!--                <li class="list-group-item"-->
-<!--                    *ngFor="let user of users">{{user.firstName + ' ' + user.lastName}}</li>-->
-<!--              </ul>-->
+              <!--                    *ngFor="let user of users">{{user.firstName + ' ' + user.lastName}}</li>-->
+              <!--              </ul>-->
             </div>
           </div>
         </div>
