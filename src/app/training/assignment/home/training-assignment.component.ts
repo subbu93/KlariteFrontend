@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {AppComponent} from '../../../../app.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {TrainingServiceService} from '../../../../services/training-service.service';
-import {TrainingAssignment} from '../../../../model/training-assignment';
+import {TrainingServiceService} from '../../../services/training-service.service';
+import {TrainingAssignment} from '../../../model/training-assignment';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-training-assignment',
   templateUrl: './training-assignment.component.html',
-  styleUrls: ['./training-assignment.component.css', '../../../../app.component.css', '../../../../admin/admin.component.css']
+  styleUrls: ['./training-assignment.component.css', '../../../app.component.css', '../../../admin/admin.component.css']
 })
-export class TrainingAssignmentComponent implements OnInit {
+export class TrainingAssignmentComponent implements OnInit, OnDestroy {
 
   assignments: TrainingAssignment[];
   navigationSubscription;
@@ -82,7 +82,9 @@ export class TrainingAssignmentComponent implements OnInit {
     assignment.isSelected = !state;
     if (assignment.isSelected) {
       this.selected = assignment;
-      this.qrdata = assignment.uuid;
+      // const qr = 'uuid=' + assignment.uuid + '&assignmentId=' + assignment.assignmentId;
+      const qr = assignment.uuid;
+      this.qrdata = qr;
     } else {
       this.selected = null;
     }
@@ -91,5 +93,11 @@ export class TrainingAssignmentComponent implements OnInit {
   onGenerateQRCode() {
     const div = document.getElementsByClassName('qrcode')[0];
     this.href = div.getElementsByTagName('img')[0].src;
+  }
+
+  ngOnDestroy(): void {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 }

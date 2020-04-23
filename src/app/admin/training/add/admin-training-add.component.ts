@@ -7,6 +7,7 @@ import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
 import {User} from '../../../model/user';
+import {AuthenticationServiceService} from '../../../services/authentication-service.service';
 
 @Component({
   selector: 'app-admin-training-add',
@@ -21,7 +22,8 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
   constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private authService: AuthenticationServiceService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd && e.url === '/admin-training-add') {
@@ -30,6 +32,9 @@ export class AdminTrainingAddComponent implements OnInit, OnDestroy {
         appComponent.title = 'Admin - Training';
       }
     });
+    if (authService.currentUserValue) {
+      appComponent.login = true;
+    }
   }
 
   ngOnInit(): void {

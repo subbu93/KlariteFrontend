@@ -1,0 +1,17 @@
+.search-list{
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 250px;
+  height: 100%;
+  text-align: left;
+}
+.background-color-custom {
+  background-color: #76BDAB;
+  color: white;
+}
+
+.padding-right-5 {
+  padding-right: 5%;
+}

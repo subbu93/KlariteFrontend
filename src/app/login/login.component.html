@@ -1,0 +1,52 @@
+<div class="container login-container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6 login-form-1">
+      <img src="assets/img/logo.png" class="w-75 center-block" alt="Logo">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" formControlName="username" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">Login</button>
+          <img *ngIf="loading" class="pl-3"
+               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--<div class="container login-container">-->
+<!--  <div class="row justify-content-center align-items-center">-->
+<!--    <div class="col-md-6 login-form-1">-->
+<!--      <form action="/login" method="POST">-->
+<!--        <img src="assets/img/logo.png" class="w-75 center-block" alt="Logo">-->
+<!--        <div class="form-group">-->
+<!--          <input type="text" class="form-control" placeholder="OSUWMC Username *" value="" name="username"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <input type="password" class="form-control" placeholder="OSUWMC Password *" value=""-->
+<!--                 name="password"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <input type="submit" class="btnSubmit" value="Login"/>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <a href="#" class="ForgetPwd">Forget Password?</a>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

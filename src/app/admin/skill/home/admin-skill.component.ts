@@ -72,7 +72,9 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
           },
           (response: HttpErrorResponse) => {
             if (response.status === 200) {
-              window.location.reload();
+              this.adminService.getAllSkills().subscribe(data => {
+                this.skills = data;
+              });
             } else {
               this.toastr.error('Could not delete data');
             }

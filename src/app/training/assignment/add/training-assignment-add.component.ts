@@ -1,26 +1,26 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SkillAssignment} from '../../../../model/skill-assignment';
-import {User} from '../../../../model/user';
+import {SkillAssignment} from '../../../model/skill-assignment';
+import {User} from '../../../model/user';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
-import {CostCenter} from '../../../../model/cost-center';
-import {Skill} from '../../../../model/skill';
+import {CostCenter} from '../../../model/cost-center';
+import {Skill} from '../../../model/skill';
 import {FormControl, FormGroup} from '@angular/forms';
-import {AdminServiceService} from '../../../../services/admin-service.service';
-import {SkillServiceService} from '../../../../services/skill-service.service';
-import {AppComponent} from '../../../../app.component';
+import {AdminServiceService} from '../../../services/admin-service.service';
+import {SkillServiceService} from '../../../services/skill-service.service';
+import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Training} from '../../../../model/training';
+import {Training} from '../../../model/training';
 import {HttpErrorResponse} from '@angular/common/http';
-import {TrainingAssignment} from '../../../../model/training-assignment';
-import {BusinessUnit} from '../../../../model/business-unit';
-import {TrainingServiceService} from '../../../../services/training-service.service';
+import {TrainingAssignment} from '../../../model/training-assignment';
+import {BusinessUnit} from '../../../model/business-unit';
+import {TrainingServiceService} from '../../../services/training-service.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-training-assignment-add',
   templateUrl: './training-assignment-add.component.html',
-  styleUrls: ['./training-assignment-add.component.css', '../../../../app.component.css', '../../../../admin/admin.component.css']
+  styleUrls: ['./training-assignment-add.component.css', '../../../app.component.css', '../../../admin/admin.component.css']
 })
 export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
 
@@ -35,6 +35,7 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
   costCenters: CostCenter[] = [];
   trainings: Training[] = [];
   private form: FormGroup;
+  dropdownRequiredField = false;
 
   constructor(private adminService: AdminServiceService,
               private skillService: SkillServiceService,
@@ -44,10 +45,10 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
               private toastr: ToastrService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd && e.url === '/skill-assignment-add') {
+      if (e instanceof NavigationEnd && e.url === '/training-assignment-add') {
         appComponent.previousUrl = appComponent.currentUrl;
         appComponent.currentUrl = e.url;
-        appComponent.title = 'Skill - Assignment';
+        appComponent.title = 'Training - Assignment';
         console.log(appComponent.previousUrl);
       }
     });
@@ -132,9 +133,19 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
     });
   }
 
+  checkUserDropdownValid() {
+    if (this.selectedUsers.length > 0) {
+      this.dropdownRequiredField = true;
+    } else {
+      this.dropdownRequiredField = false;
+    }
+    console.log(this.dropdownRequiredField);
+  }
+
   onItemSelect(item: any) {
     this.selectedUsers.push(item);
     console.log(this.selectedUsers);
+    this.checkUserDropdownValid();
   }
 
   OnItemDeSelect(item: any) {
@@ -146,19 +157,22 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
       }
       index++;
     }
+    this.checkUserDropdownValid();
   }
 
   onSelectAll(items: any) {
     console.log(this.selectedUsers);
     this.selectedUsers = items;
-
+    this.checkUserDropdownValid();
   }
 
   onDeSelectAll($event: any) {
     this.selectedUsers = [];
+    this.checkUserDropdownValid();
   }
 
   public setForm() {
+    this.checkUserDropdownValid();
     this.form = new FormGroup({
       name: new FormControl(this.selectedUsers)
     });

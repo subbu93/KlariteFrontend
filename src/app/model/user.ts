@@ -1,6 +1,8 @@
+import {Roles} from './roles.enum';
+
 export class User {
   id: bigint;
-  ousId: number;
+  osuId: number;
   firstName: string;
   middleName: string;
   lastName: string;
@@ -10,5 +12,8 @@ export class User {
   businessUnitId: number;
   businessUnitName: string;
   url: string;
-  isTrainer: boolean;
+  trainer: boolean;
+  trainingAttended: boolean;
+  token: string;
+  role: Roles;
 }

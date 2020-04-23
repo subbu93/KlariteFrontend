@@ -34,7 +34,8 @@
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "uuid": "^7.0.2",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "ts-md5": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.0-rc.12",

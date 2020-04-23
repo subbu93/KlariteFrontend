@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {AdminServiceService} from '../../../../services/admin-service.service';
-import {AppComponent} from '../../../../app.component';
+import {AdminServiceService} from '../../../services/admin-service.service';
+import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {SkillAssignment} from '../../../../model/skill-assignment';
-import {User} from '../../../../model/user';
-import {SkillServiceService} from '../../../../services/skill-service.service';
-import {CostCenter} from '../../../../model/cost-center';
-import {Skill} from '../../../../model/skill';
+import {SkillAssignment} from '../../../model/skill-assignment';
+import {User} from '../../../model/user';
+import {SkillServiceService} from '../../../services/skill-service.service';
+import {CostCenter} from '../../../model/cost-center';
+import {Skill} from '../../../model/skill';
 import {HttpErrorResponse} from '@angular/common/http';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -15,7 +15,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-skill-assignment-add',
   templateUrl: './skill-assignment-add.component.html',
-  styleUrls: ['./skill-assignment-add.component.css', '../../../../app.component.css', '../../../../admin/admin.component.css']
+  styleUrls: ['./skill-assignment-add.component.css', '../../../app.component.css', '../../../admin/admin.component.css']
 })
 export class SkillAssignmentAddComponent implements OnInit, OnDestroy {
 

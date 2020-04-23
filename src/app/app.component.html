@@ -1,3 +1,4 @@
+<div *ngIf="login">
 <div class = "row justify-content-center align-items-center margin-right">
   <div class="col-md-5">
     <a class="navbar-item" [routerLink]="['/home']">
@@ -5,6 +6,7 @@
     </a>
   </div>
   <div class ="col-md-7"><h3><b>{{title}}</b></h3></div>
+<!--  <button class = "col-md-1 oi-align-center" (click)="logout()">Logout</button>-->
 </div>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse"
@@ -17,17 +19,20 @@
       <li ngbDropdown class="nav-item dropdown">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>Skills</a>
         <div ngbDropdownMenu class = "bg-dark no-border">
-          <button ngbDropdownItem [routerLink]="['skill-assignment']" class = "bg-dark text-light">Assignment</button>
+          <button ngbDropdownItem [routerLink]="['skill-assignment']"
+                  class = "bg-dark text-light" [hidden]="!showAssignment">Assignment</button>
           <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Analysis</button>
-          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Validation</button>
+          <button disabled ngbDropdownItem
+                  class = "bg-dark text-light text-muted" [hidden]="!showAssignment">Validation</button>
           <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Report</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item dropdown">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>Training</a>
         <div ngbDropdownMenu class = "bg-dark no-border">
-          <button ngbDropdownItem [routerLink]="['training-assignment']" class = "bg-dark text-light">Assignment</button>
-          <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Report</button>
+          <button ngbDropdownItem [routerLink]="['training-assignment']"
+                  class = "bg-dark text-light" [hidden]="!showAssignment">Assignment</button>
+          <button ngbDropdownItem [routerLink]="['training-report']" class = "bg-dark text-light">Report</button>
         </div>
       </li>
       <li ngbDropdown class="nav-item dropdown">
@@ -37,7 +42,7 @@
           <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Search</button>
         </div>
       </li>
-      <li ngbDropdown class="nav-item dropdown">
+      <li ngbDropdown class="nav-item dropdown" [hidden]="!showAdmin">
         <a href (click)="false" class="nav-link" ngbDropdownToggle>Admin</a>
         <div ngbDropdownMenu class = "bg-dark no-border">
           <button ngbDropdownItem [routerLink]="['admin-skill']" class = "bg-dark text-light">Skills</button>
@@ -45,12 +50,21 @@
           <button disabled ngbDropdownItem class = "bg-dark text-light text-muted">Certification</button>
 <!--          <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">CE</button>-->
           <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">Contact Hours</button>
+          <button ngbDropdownItem [routerLink]="['admin-users']" class = "bg-dark text-light">Users</button>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li ngbDropdown class="nav-item dropdown dropdown-menu-right">
+        <a href (click)="false" class="nav-link" ngbDropdownToggle>Hi {{displayUserName}}</a>
+        <div ngbDropdownMenu class = "bg-dark no-border pull-right">
+          <button ngbDropdownItem (click)="logout()" class = "bg-dark text-light">Logout</button>
         </div>
       </li>
     </ul>
   </div>
 </nav>
-
-<div class="container">
+</div>
+<div class="container-fluid">
   <router-outlet></router-outlet>
 </div>

@@ -1,5 +1,5 @@
 <div class="my-5">
-  <form #skillForm="ngForm">
+  <form #trainingAssignmentForm="ngForm">
     <div class="form-group row">
       <label class="col-sm-4 text-center" for="name">Assignment Name</label>
       <input [(ngModel)]="assignment.trainingAssignmentName" class="form-control col-sm-5" id="name"
@@ -15,7 +15,7 @@
     <div class="form-group row">
       <label class="col-sm-4 text-center" for="businessUnit">Business Unit</label>
       <select class="form-control col-sm-5" id="businessUnit" required
-              [(ngModel)]="assignment.businessUnitId" name="costCenter" (change)="onChangeBusinessUnit()">
+              [(ngModel)]="assignment.businessUnitId" name="businessUnit" (change)="onChangeBusinessUnit()">
         <option *ngFor="let businessUnit of businessUnits" [value]="businessUnit.id">
           {{businessUnit.businessUnitName}}</option>
       </select>
@@ -41,7 +41,7 @@
                                (onSelect)="onItemSelect($event)"
                                (onDeSelect)="OnItemDeSelect($event)"
                                (onSelectAll)="onSelectAll($event)"
-                               (onDeSelectAll)="onDeSelectAll($event)">
+                               (onDeSelectAll)="onDeSelectAll($event)" [required]="dropdownRequiredField">
       </ng-multiselect-dropdown>
       </span>
     </div>
@@ -91,8 +91,9 @@
     <button (click)="onCancel()" class="task-button text-center">Cancel</button>
   </div>
   <div class="col-sm-2">
-<!--    <button (click)="onSave()" class="btn task-button text-center add-btn" [disabled]="!skillForm.form.valid">Save-->
-    <button (click)="onSave()" class="btn task-button text-center add-btn">Save
+    <button (click)="onSave()" class="btn task-button text-center add-btn"
+            [disabled]="!trainingAssignmentForm.form.valid && !dropdownRequiredField">Save
+<!--    <button (click)="onSave()" class="btn task-button text-center add-btn">Save-->
     </button>
   </div>
 </div>

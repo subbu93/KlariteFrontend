@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {SkillAssignment} from '../../../../model/skill-assignment';
-import {AppComponent} from '../../../../app.component';
+import {SkillAssignment} from '../../../model/skill-assignment';
+import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {SkillServiceService} from '../../../../services/skill-service.service';
+import {SkillServiceService} from '../../../services/skill-service.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-skill-assignment',
   templateUrl: './skill-assignment.component.html',
-  styleUrls: ['./skill-assignment.component.css', '../../../../app.component.css', '../../../../admin/admin.component.css']
+  styleUrls: ['./skill-assignment.component.css', '../../../app.component.css', '../../../admin/admin.component.css']
 })
 export class SkillAssignmentComponent implements OnInit {
   assignments: SkillAssignment[];
@@ -33,6 +33,7 @@ export class SkillAssignmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillService.getAllAssignments().subscribe(data => {
+      console.log(data);
       this.assignments = data;
     });
   }

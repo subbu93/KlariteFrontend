@@ -1,0 +1,68 @@
+<div class="my-5">
+  <form>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="skill">Select Training Assignment</label>
+      <select class="form-control col-sm-5" id="skill" required
+              [(ngModel)]="selected.id" name="skill" (ngModelChange)="getAttendanceList($event)">
+        <option *ngFor="let assignment of assignments" [value]="assignment.assignmentId">{{assignment.trainingAssignmentName}}</option>
+      </select>
+    </div>
+    <div *ngIf="users" class="row margin-top-2">
+      <div class="col-sm-6">
+        <div class = "row">
+          <div class="col-sm-12">
+            <div class="row margin-top-10 d-flex float-md-right padding-right-5">
+              <ul class="list-group search-list max_height_list over_flow" id="myList">
+                <li class="list-group-item background-color-custom">Attended</li>
+                <i class="fas fa-search" aria-hidden="true"></i>
+<!--                <input class="form-control form-control-sm w-100" -->
+<!--                       (input)="searchAttended($event.target.value)" -->
+<!--                       type="text" placeholder="Search"-->
+<!--                       aria-label="Search">-->
+                <li class="list-group-item"
+                    *ngFor="let user of attended">{{user.firstName + ' ' + user.lastName}}</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+                <li class="list-group-item">asdsad</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class = "row">
+          <div class="col-sm-12">
+            <div class="row margin-top-10 d-flex">
+              <ul class="list-group search-list max_height_list over_flow" id="myList">
+                <li class="list-group-item background-color-custom">Not Attended</li>
+                <i class="fas fa-search" aria-hidden="true"></i>
+<!--                <input class="form-control form-control-sm w-100 " type="text" placeholder="Search"-->
+<!--                       aria-label="Search">-->
+                <li class="list-group-item"
+                    *ngFor="let user of notAttended">{{user.firstName + ' ' + user.lastName}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

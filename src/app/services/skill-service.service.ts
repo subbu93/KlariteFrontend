@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {SkillAssignment} from '../model/skill-assignment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../model/user';
 import {CostCenter} from '../model/cost-center';
 import {BusinessUnit} from '../model/business-unit';
+import {environment} from '../../environments/environment';
+import {AuthenticationServiceService} from './authentication-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +18,14 @@ export class SkillServiceService {
   private addSkillAssignmentUrl: string;
   private getBusinessUnitsUrl: string;
 
-  constructor(private http: HttpClient) {
-    this.getAllAssignmentsUrl = 'http://localhost:8080/assign_skill/get_assigned_skills';
-    this.deleteAssignmentsUrl = 'http://localhost:8080/assign_skill/delete_assigned_skill';
-    this.getAllUsersUrl = 'http://localhost:8080/user_services/get_all_users';
-    this.getCostCentersUrl = 'http://localhost:8080/assign_skill/get_cost_centers';
-    this.addSkillAssignmentUrl = 'http://localhost:8080/assign_skill/add_skill_assignment';
-    this.getBusinessUnitsUrl = 'http://localhost:8080/assign_skill/get_business_units';
+  constructor(private http: HttpClient,
+              private authenticationService: AuthenticationServiceService) {
+    this.getAllAssignmentsUrl = `${environment.apiUrl}/assign_skill/get_all_assignments`;
+    this.deleteAssignmentsUrl = `${environment.apiUrl}/assign_skill/delete_assigned_skill`;
+    this.getAllUsersUrl = `${environment.apiUrl}/user_services/get_all_users`;
+    this.getCostCentersUrl = `${environment.apiUrl}/assign_skill/get_cost_centers`;
+    this.addSkillAssignmentUrl = `${environment.apiUrl}/assign_skill/add_skill_assignment`;
+    this.getBusinessUnitsUrl = `${environment.apiUrl}/assign_skill/get_business_units`;
   }
 
   deleteAssignment(selected: SkillAssignment) {
@@ -33,7 +36,13 @@ export class SkillServiceService {
   }
 
   public getAllAssignments() {
-    return this.http.get<SkillAssignment[]>(this.getAllAssignmentsUrl);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        token: this.authenticationService.currentUserValue.token
+      })
+    };
+    return this.http.get<SkillAssignment[]>(this.getAllAssignmentsUrl, httpOptions);
   }
 
   public getAllUSers() {

@@ -1,0 +1,113 @@
+<div class="my-5">
+  <form #createUserForm="ngForm">
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="firstName">First Name</label>
+      <input [(ngModel)]="user.firstName" class="form-control col-sm-5" id="firstName"
+             name="firstName"
+             required
+             type="text" placeholder="Enter first name" #firstName="ngModel">
+      <div [hidden]="firstName.valid || firstName.pristine || firstName.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter first name
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="middleName">Middle Name</label>
+      <input [(ngModel)]="user.middleName" class="form-control col-sm-5" id="middleName"
+             name="middleName"
+             type="text" placeholder="Enter middle name" #middleName="ngModel">
+      <div [hidden]="middleName.valid || middleName.pristine || middleName.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter middle name
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="lastName">Last Name</label>
+      <input [(ngModel)]="user.lastName" class="form-control col-sm-5" id="lastName"
+             name="lastName"
+             required
+             type="text" placeholder="Enter last name" #lastName="ngModel">
+      <div [hidden]="lastName.valid || lastName.pristine || lastName.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter last name
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="osuId">OSU Id</label>
+      <input [(ngModel)]="user.osuId" class="form-control col-sm-5" id="osuId"
+             name="osuId"
+             required
+             type="text" placeholder="Enter OSU ID e.g.: patra.14 " #osuId="ngModel">
+      <div [hidden]="osuId.valid || osuId.pristine || osuId.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter Osu Id
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="emailId">Email Id</label>
+      <input [(ngModel)]="user.email" class="form-control col-sm-5" id="emailId"
+             name="emailId"
+             required
+             type="text" placeholder="Enter email Id " #emailId="ngModel">
+      <div [hidden]="emailId.valid || emailId.pristine || emailId.untouched"
+           class="input col-sm-2 alert-danger">
+        Enter email id
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="businessUnit">Business Unit</label>
+      <select class="form-control col-sm-5" id="businessUnit" required
+              [(ngModel)]="user.businessUnitId" name="businessUnit">
+        <option *ngFor="let businessUnit of businessUnits" [value]="businessUnit.id">
+          {{businessUnit.businessUnitName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="costCenter">Cost Center</label>
+      <select class="form-control col-sm-5" id="costCenter" required
+              [(ngModel)]="user.costCenterId" name="costCenter">
+        <option *ngIf="!user.costCenterId" hidden value="" disabled>Select one training</option>
+        <option *ngFor="let costCenter of costCenters" [value]="costCenter.id">{{costCenter.costCenterName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 text-center">Is Trainer</label>
+      <div class="col-sm-2 form-check">
+        <input class="form-check-input" type="radio" value = true id="trainerYes"
+               name="CE" [checked]="user.trainer" (change)="user.trainer=true" >
+        <label class="form-check-label" for="trainerYes">Yes</label>
+      </div>
+      <div class="col-sm-2 form-check">
+        <input class="for m-check-input" type="radio" value = false id="trainerNo"
+               name="CE" [checked]="!user.trainer" (change)="user.trainer=false">
+        <label class="form-check-label" for="trainerNo">No</label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="role">Role</label>
+      <select class="form-control col-sm-5" id="role" required
+              [(ngModel)]="user.role" name="role">
+        <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+      </select>
+    </div>
+
+
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="col-sm-2">
+    <button (click)="onCancel()" class="task-button text-center">Cancel</button>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="onSave()" class="btn task-button text-center add-btn" [disabled]="!createUserForm.form.valid">Save
+      <!--    <button (click)="onSave()" class="btn task-button text-center add-btn">Save-->
+    </button>
+  </div>
+</div>

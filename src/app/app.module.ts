@@ -14,12 +14,17 @@ import {ToastrModule} from 'ngx-toastr';
 import {AdminTrainingComponent} from './admin/training/home/admin-training.component';
 import {AdminTrainingAddComponent} from './admin/training/add/admin-training-add.component';
 import {ContactHoursComponent} from './admin/contact-hours/contact-hours.component';
-import {SkillAssignmentComponent} from './skill/assignemnt/skill-assignment/home/skill-assignment.component';
-import {SkillAssignmentAddComponent} from './skill/assignemnt/skill-assignment/add/skill-assignment-add.component';
+import {SkillAssignmentComponent} from './skill/assignemnt/home/skill-assignment.component';
+import {SkillAssignmentAddComponent} from './skill/assignemnt/add/skill-assignment-add.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import { TrainingAssignmentComponent } from './training/assignment/training-assignment/home/training-assignment.component';
-import { TrainingAssignmentAddComponent } from './training/assignment/training-assignment/add/training-assignment-add.component';
+import { TrainingAssignmentComponent } from './training/assignment/home/training-assignment.component';
+import { TrainingAssignmentAddComponent } from './training/assignment/add/training-assignment-add.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { TrainingReportComponent } from './training/report/training-report.component';
+import { LoginComponent } from './login/login.component';
+import {Md5} from 'ts-md5/dist/md5';
+import { AdminUsersComponent } from './admin/User/home/admin-users.component';
+import { AdminUsersAddComponent } from './admin/User/add/admin-users-add.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,10 @@ import { QRCodeModule } from 'angularx-qrcode';
     SkillAssignmentAddComponent,
     TrainingAssignmentComponent,
     TrainingAssignmentAddComponent,
+    TrainingReportComponent,
+    LoginComponent,
+    AdminUsersComponent,
+    AdminUsersAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +54,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule,
     ReactiveFormsModule,
-    QRCodeModule
+    QRCodeModule,
   ],
-  providers: [],
+  providers: [Md5],
   bootstrap: [AppComponent]
 })
 export class AppModule {

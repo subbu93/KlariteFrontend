@@ -6,23 +6,45 @@ import {AdminSkillAddComponent} from './admin/skill/add/admin-skill-add.componen
 import {AdminTrainingComponent} from './admin/training/home/admin-training.component';
 import {AdminTrainingAddComponent} from './admin/training/add/admin-training-add.component';
 import {ContactHoursComponent} from './admin/contact-hours/contact-hours.component';
-import {SkillAssignmentComponent} from './skill/assignemnt/skill-assignment/home/skill-assignment.component';
-import {SkillAssignmentAddComponent} from './skill/assignemnt/skill-assignment/add/skill-assignment-add.component';
-import {TrainingAssignmentComponent} from './training/assignment/training-assignment/home/training-assignment.component';
-import {TrainingAssignmentAddComponent} from './training/assignment/training-assignment/add/training-assignment-add.component';
+import {SkillAssignmentComponent} from './skill/assignemnt/home/skill-assignment.component';
+import {SkillAssignmentAddComponent} from './skill/assignemnt/add/skill-assignment-add.component';
+import {TrainingAssignmentComponent} from './training/assignment/home/training-assignment.component';
+import {TrainingAssignmentAddComponent} from './training/assignment/add/training-assignment-add.component';
+import {TrainingReportComponent} from './training/report/training-report.component';
+import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './_gaurds/auth.gaurd';
+import {AdminUsersComponent} from './admin/User/home/admin-users.component';
+import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component';
+import {Roles} from './model/roles.enum';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent },
-  { path: 'admin-skill', component: AdminSkillComponent},
-  { path: 'admin-skill-add', component: AdminSkillAddComponent},
-  { path: 'admin-training', component: AdminTrainingComponent},
-  { path: 'admin-training-add', component: AdminTrainingAddComponent},
-  { path: 'admin-ce', component: ContactHoursComponent},
-  { path: 'skill-assignment', component: SkillAssignmentComponent},
-  { path: 'skill-assignment-add', component: SkillAssignmentAddComponent},
-  { path: 'training-assignment', component: TrainingAssignmentComponent},
-  { path: 'training-assignment-add', component: TrainingAssignmentAddComponent}
+  { path: 'home', component: HomeComponent,  canActivate: [AuthGuard] },
+  { path: 'admin-skill', component: AdminSkillComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]} },
+  { path: 'admin-skill-add', component: AdminSkillAddComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]}  },
+  { path: 'admin-training', component: AdminTrainingComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]} },
+  { path: 'admin-training-add', component: AdminTrainingAddComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]} },
+  { path: 'admin-ce', component: ContactHoursComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]} },
+  { path: 'admin-users', component: AdminUsersComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]} },
+  { path: 'admin-users-add', component: AdminUsersAddComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]} },
+  { path: 'skill-assignment', component: SkillAssignmentComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser]} },
+  { path: 'skill-assignment-add', component: SkillAssignmentAddComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser]} },
+  { path: 'training-assignment', component: TrainingAssignmentComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser]} },
+  { path: 'training-assignment-add', component: TrainingAssignmentAddComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser]} },
+  { path: 'training-report', component: TrainingReportComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser, Roles.Nurse]} },
+  { path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
