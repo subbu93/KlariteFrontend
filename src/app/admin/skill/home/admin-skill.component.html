@@ -1,4 +1,7 @@
-<div class="my-5 max_height_list over_flow">
+<div *ngIf="showMsg" class="my-5 max_height_list over_flow">
+  <h1>No Data Available</h1>
+</div>
+<div *ngIf="!showMsg" class="my-5 max_height_list over_flow">
   <div class="row justify-content padding-top-40">
     <div *ngFor="let skill of skills" class="d-flex justify-content-center col-sm-3">
       <div (click)="myClick(skill)" [class.highlight]="skill.isSelected" ngbTooltip="{{skill.skillName}}"

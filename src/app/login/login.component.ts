@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   navigationSubscription;
+  row = [];
 
   constructor(private formBuilder: FormBuilder,
               private appComponent: AppComponent,
@@ -78,7 +79,8 @@ export class LoginComponent implements OnInit {
           if (error.status === 401) {
             this.toastr.error('Invalid username or password');
           } else {
-            this.toastr.error('Error while login. Please try later');
+            console.log(error);
+            this.toastr.error(error.message);
           }
           this.loading = false;
         });

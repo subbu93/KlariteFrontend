@@ -5,7 +5,7 @@
       <input [(ngModel)]="assignment.trainingAssignmentName" class="form-control col-sm-5" id="name"
              name="name"
              required
-             type="text" placeholder="Enter skill name" #name="ngModel">
+             type="text" placeholder="Enter Assignment name" #name="ngModel">
       <div [hidden]="name.valid || name.pristine || name.untouched"
            class="input col-sm-2 alert-danger">
         Enter assignment name
@@ -15,7 +15,7 @@
     <div class="form-group row">
       <label class="col-sm-4 text-center" for="businessUnit">Business Unit</label>
       <select class="form-control col-sm-5" id="businessUnit" required
-              [(ngModel)]="assignment.businessUnitId" name="businessUnit" (change)="onChangeBusinessUnit()">
+              [(ngModel)]="assignment.businessUnitId" name="businessUnit" (change)="generateUserList()">
         <option *ngFor="let businessUnit of businessUnits" [value]="businessUnit.id">
           {{businessUnit.businessUnitName}}</option>
       </select>
@@ -24,7 +24,7 @@
     <div class="form-group row">
       <label class="col-sm-4 text-center" for="costCenter">Cost Center</label>
       <select class="form-control col-sm-5" id="costCenter" required
-              [(ngModel)]="assignment.costCenterId" name="costCenter" (change)="onChangeCostCenter()">
+              [(ngModel)]="assignment.costCenterId" name="costCenter" (change)="generateUserList()">
         <option *ngIf="!assignment.costCenterId" hidden value="" disabled>Select one training</option>
         <option *ngFor="let costCenter of costCenters" [value]="costCenter.id">{{costCenter.costCenterName}}</option>
       </select>

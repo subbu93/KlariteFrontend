@@ -23,6 +23,7 @@ export class AdminServiceService {
   getCeHour: string;
   getUsersUrl: string;
   createUserUrl: string;
+  deleteUserUrl: string;
 
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationServiceService) {
@@ -37,6 +38,7 @@ export class AdminServiceService {
     this.getCeHour = `${environment.apiUrl}/skill_admin/get_ce_hrs`;
     this.getUsersUrl = `${environment.apiUrl}/user_services/get_all_users`;
     this.createUserUrl = `${environment.apiUrl}/user_services/add_user`;
+    this.deleteUserUrl = `${environment.apiUrl}/user_services/delete_user`;
   }
 
   public getAllSkills(): Observable<Skill[]> {
@@ -106,5 +108,17 @@ export class AdminServiceService {
     };
     console.log(user);
     return this.http.post<User>(this.createUserUrl, user, httpOptions);
+  }
+
+  deleteUser(selectedUser: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        token: this.authenticationService.currentUserValue.token
+      })
+    };
+    console.log(selectedUser);
+    const url = `${this.deleteUserUrl}?id=${selectedUser.id}`;
+    return this.http.delete(url, httpOptions);
   }
 }

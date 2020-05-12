@@ -18,6 +18,7 @@ export class TrainingAssignmentComponent implements OnInit, OnDestroy {
   selected: TrainingAssignment = null;
   qrdata = '';
   href: string;
+  showMsg = false;
 
   constructor(private trainingService: TrainingServiceService,
               private appComponent: AppComponent,
@@ -37,6 +38,9 @@ export class TrainingAssignmentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.trainingService.getAllAssignments().subscribe(data => {
       this.assignments = data;
+      if (data.length == 0) {
+        this.showMsg = true;
+      }
     });
   }
 
@@ -51,6 +55,9 @@ export class TrainingAssignmentComponent implements OnInit, OnDestroy {
             if (response.status === 200) {
               this.trainingService.getAllAssignments().subscribe(data => {
                 this.assignments = data;
+                if (data.length == 0) {
+                  this.showMsg = true;
+                }
               });
             } else {
               this.toastr.error('Could not delete data');

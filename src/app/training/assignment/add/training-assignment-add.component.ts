@@ -54,8 +54,8 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
       this.users = data;
       console.log(data);
       const list = [];
+      if (this.assignment.assignedUserIds) {
       for (const user of data) {
-        if (this.assignment.assignedUserIds) {
           for (const id of this.assignment.assignedUserIds) {
             if (user.id == id) {
               console.log(user.firstName + '  ' + user.lastName);
@@ -65,8 +65,6 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
           if (this.assignment.costCenterId == user.costCenterId) {
             list.push({id: user.id, name: user.firstName + '  ' + user.lastName});
           }
-        } else {
-          list.push({id: user.id, name: user.firstName + '  ' + user.lastName});
         }
       }
       this.usersList = list;
@@ -180,30 +178,25 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
-  onChangeCostCenter() {
+  generateUserList() {
     const list = [];
+    this.usersList = list;
+    this.selectedUsers = [];
+    if (!this.assignment.businessUnitId) {
+      this.toastr.error('Select business unit');
+      return;
+    }
+    if (!this.assignment.costCenterId) {
+      this.toastr.error('Select cost center');
+      return;
+    }
     for (const user of this.users) {
-      if (user.costCenterId == this.assignment.costCenterId) {
+      if (user.costCenterId == this.assignment.costCenterId
+        && user.businessUnitId == this.assignment.businessUnitId) {
         list.push({id: user.id, name: user.firstName + '  ' + user.lastName});
       }
     }
     this.usersList = list;
-    this.selectedUsers = [];
-    this.setForm();
-  }
-
-  onChangeBusinessUnit() {
-    const usrlist = [];
-    const cstlist = [];
-    for (const user of this.users) {
-      if (user.businessUnitId == this.assignment.businessUnitId) {
-        usrlist.push({id: user.id, name: user.firstName + '  ' + user.lastName});
-        cstlist.push({id: user.costCenterId, costCenterName: user.costCenterName});
-      }
-    }
-    this.usersList = usrlist;
-    this.costCenters = cstlist;
-    this.selectedUsers = [];
     this.setForm();
   }
 

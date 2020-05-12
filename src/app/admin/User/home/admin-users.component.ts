@@ -5,6 +5,7 @@ import {AppComponent} from '../../../app.component';
 import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {AuthenticationServiceService} from '../../../services/authentication-service.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-users',
@@ -59,6 +60,29 @@ export class AdminUsersComponent implements OnInit {
 
   onDelete() {
     //  Call to delete User
+    if (this.selectedUser[0].id == this.authService.currentUserValue.id) {
+      this.toastr.error('Cannot delete current user');
+      return;
+    }
+    if (this.selectedUser) {
+      this.adminService.deleteUser(this.selectedUser[0])
+        .subscribe(
+          (val) => {
+            console.log(val);
+          },
+          (response: HttpErrorResponse) => {
+            if (response.status === 200) {
+              this.adminService.getAllUsers().subscribe(data => {
+                this.users = data;
+                this.filteredItems = Object.assign([], data);
+              });
+            } else {
+              this.toastr.error('Could not delete User');
+            }
+          });
+    } else {
+      this.toastr.error('Select a User to delete');
+    }
   }
 
   onEdit() {

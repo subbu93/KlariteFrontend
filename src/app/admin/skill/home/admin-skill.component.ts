@@ -15,6 +15,7 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
   skills: Skill[];
   navigationSubscription;
   selected: Skill = null;
+  showMsg = false;
 
   constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
@@ -34,6 +35,9 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.adminService.getAllSkills().subscribe(data => {
       this.skills = data;
+      if (data.length == 0) {
+        this.showMsg = true;
+      }
       // console.log(data);
     });
   }
@@ -75,6 +79,9 @@ export class AdminSkillComponent implements OnInit, OnDestroy {
             if (response.status === 200) {
               this.adminService.getAllSkills().subscribe(data => {
                 this.skills = data;
+                if (data.length == 0) {
+                  this.showMsg = true;
+                }
               });
             } else {
               this.toastr.error('Could not delete data');

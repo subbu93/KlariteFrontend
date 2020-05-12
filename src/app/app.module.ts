@@ -25,6 +25,10 @@ import {LoginComponent} from './login/login.component';
 import {Md5} from 'ts-md5/dist/md5';
 import {AdminUsersComponent} from './admin/User/home/admin-users.component';
 import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component';
+import {AnalysisComponent} from './skill/analysis/analysis.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { AuditedNotPipePipe } from './model/audited-not-pipe.pipe';
+import { ValidationComponent } from './skill/validation/validation.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,9 @@ import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component
     LoginComponent,
     AdminUsersComponent,
     AdminUsersAddComponent,
+    AnalysisComponent,
+    AuditedNotPipePipe,
+    ValidationComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,7 @@ import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component
     NgMultiSelectDropDownModule,
     ReactiveFormsModule,
     QRCodeModule,
+    NgxChartsModule,
   ],
   providers: [Md5],
   bootstrap: [AppComponent]

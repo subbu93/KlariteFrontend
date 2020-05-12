@@ -22,9 +22,10 @@
             <button ngbDropdownItem [routerLink]="['skill-assignment']"
                     class="bg-dark text-light" [hidden]="!showAssignment">Assignment
             </button>
-            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Analysis</button>
-            <button disabled ngbDropdownItem
-                    class="bg-dark text-light text-muted" [hidden]="!showAssignment">Validation
+            <button ngbDropdownItem [routerLink]="['skill-analysis']"
+                    class="bg-dark text-light">Analysis</button>
+            <button ngbDropdownItem [routerLink]="['skill-validation']"
+                    class="bg-dark text-light" [hidden]="!showAssignment">Validation
             </button>
             <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Report</button>
           </div>

@@ -15,6 +15,7 @@ export class SkillAssignmentComponent implements OnInit {
   assignments: SkillAssignment[];
   navigationSubscription;
   selected: SkillAssignment = null;
+  showMsg = false;
 
   constructor(private skillService: SkillServiceService,
               private appComponent: AppComponent,
@@ -35,6 +36,9 @@ export class SkillAssignmentComponent implements OnInit {
     this.skillService.getAllAssignments().subscribe(data => {
       console.log(data);
       this.assignments = data;
+      if (data.length == 0) {
+        this.showMsg = true;
+      }
     });
   }
 
@@ -50,6 +54,9 @@ export class SkillAssignmentComponent implements OnInit {
               // window.location.reload();
               this.skillService.getAllAssignments().subscribe(data => {
                 this.assignments = data;
+                if (data.length == 0) {
+                  this.showMsg = true;
+                }
               });
             } else {
               this.toastr.error('Could not delete data');

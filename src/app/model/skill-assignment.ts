@@ -7,4 +7,5 @@ export class SkillAssignment {
   skillValidatorId: number;
   completionDate: Date;
   isSelected: boolean;
+  businessUnitId: number;
 }

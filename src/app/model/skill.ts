@@ -6,4 +6,5 @@ export class Skill {
   skillTrainingPreRequisite: string;
   isSelected: boolean;
   trainingId: number;
+  episodeCount: number;
 }

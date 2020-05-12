@@ -1,6 +1,9 @@
-<div class="my-5 max_height_list over_flow">
+<div *ngIf="showMsg" class="my-5 max_height_list over_flow">
+  <h1>No Data Available</h1>
+</div>
+<div *ngIf="!showMsg" class="my-5 max_height_list over_flow">
   <div class="row justify-content padding-top-40">
-    <div *ngFor="let training of trainings" class="justify-content-center col-sm-3">
+    <div *ngFor="let training of trainings" class="d-flex justify-content-center col-sm-3">
       <div (click)="myClick(training)" [class.highlight]="training.isSelected" ngbTooltip="{{training.trainingName}}"
            class="border-round-corners margin-bottom-40 select box-setting">
         {{training.trainingName}}

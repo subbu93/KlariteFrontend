@@ -1,0 +1,110 @@
+<div class="my-5">
+  <div class="form-group row">
+    <label class="col-sm-4 text-center" for="businessUnit">Business Unit</label>
+    <select class="form-control col-sm-5" id="businessUnit" required
+            [(ngModel)]="businessUnitId" name="businessUnit">
+      <option *ngFor="let businessUnit of businessUnits" [value]="businessUnit.id">
+        {{businessUnit.businessUnitName}}</option>
+    </select>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-4 text-center" for="costCenter">Cost Center</label>
+    <select class="form-control col-sm-5" id="costCenter" required
+            [(ngModel)]="costCenterId" name="costCenter">
+      <option *ngFor="let costCenter of costCenters" [value]="costCenter.id">{{costCenter.costCenterName}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class = "col-sm-2" [hidden]="showTable || (!showChart && !showEpisodeData)">
+    <button (click)="onBack()" class="task-button text-center">Back</button>
+  </div>
+<!--  <div class="col-sm-2">-->
+<!--    <button (click)="onCancel()" class="task-button text-center">Cancel</button>-->
+<!--  </div>-->
+  <div class="col-sm-2">
+    <button (click)="onGenerate()" class="btn task-button text-center add-btn"
+            [disabled]="!businessUnitId || !costCenterId">Generate
+    </button>
+  </div>
+</div>
+<div class="my-5">
+  <div class="d-flex justify-content-center">
+    <h1 *ngIf="showMsg">No Data Available</h1>
+    <table [hidden]="!showTable || showChart" class="table table-striped table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name/Skills</th>
+        <th scope="col" *ngFor="let skill of skills" (click)="getSkillValue(skill)">
+          <a href (click)="false" class="text-decoration-none text-white">
+            {{skill.skillName}}
+          </a>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of tableAnalysisData">
+        <th scope="row" class="text-justify" (click)="generateUserGraph(row)">
+          <a href (click)="false" class="text-decoration-none text-dark">
+            {{row.name}}
+          </a>
+        </th>
+        <td *ngFor="let val of row.skillData"><span class="dot justify-content-center" [ngClass]="{
+            'dot-circle' : val == 'Assigned',
+            'dot-green' : val == 'Completed',
+            'dot-yellow': val == 'In Progress'}"></span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="my-5" [hidden]="!showChart || showTable">
+  <div class="row d-flex justify-content-center"><h3>{{chartTitle}}</h3></div>
+  <div class="d-flex justify-content-center">
+    <ngx-charts-bar-vertical
+      [view]="view"
+      [results]="single"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [barPadding]="70"
+      (select) = "onClickChart($event)">
+      <ng-template #tooltipTemplate let-model="model">
+        <p>
+          Threshold: {{ model.extra.threshold}}
+          <br>
+          Episode Count: {{ model.value }}</p>
+      </ng-template>
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
+<div class="my-5">
+  <div class="d-flex justify-content-center">
+    <h1 *ngIf="showMsg">No Data Available</h1>
+    <table [hidden]="showTable || showChart || !showEpisodeData" class="table table-striped table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Event#</th>
+        <th scope="col">Patient mrn#</th>
+        <th scope="col">Date of Service</th>
+        <th scope="col">Chart Audited</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-justify" *ngFor="let row of episodes">
+        <td scope="row" class="text-justify">{{row.id}}</td>
+        <td scope="row" class="text-justify">{{row.mrn}}</td>
+        <td scope="row" class="text-justify">{{row.date}}</td>
+        <td scope="row" class="text-justify">{{row.audited | auditedNotPipe}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

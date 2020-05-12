@@ -11,6 +11,8 @@ import {Skill} from '../../../model/skill';
 import {HttpErrorResponse} from '@angular/common/http';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {FormControl, FormGroup} from '@angular/forms';
+import {BusinessUnit} from '../../../model/business-unit';
+import {Roles} from '../../../model/roles.enum';
 
 @Component({
   selector: 'app-skill-assignment-add',
@@ -29,6 +31,8 @@ export class SkillAssignmentAddComponent implements OnInit, OnDestroy {
   costCenters: CostCenter[] = [];
   skills: Skill[] = [];
   private form: FormGroup;
+  businessUnits: BusinessUnit[] = [];
+  supervisors: User[] = [];
 
   constructor(private adminService: AdminServiceService,
               private skillService: SkillServiceService,
@@ -47,27 +51,30 @@ export class SkillAssignmentAddComponent implements OnInit, OnDestroy {
     this.skillService.getAllUSers().subscribe(data => {
       this.users = data;
       const list = [];
+      if (this.assignment.assignedUserIds) {
       for (const user of data) {
-        if (this.assignment.assignedUserIds) {
-          for (const id of this.assignment.assignedUserIds) {
+        for (const id of this.assignment.assignedUserIds) {
             if (user.id == id) {
               console.log(user.firstName + '  ' + user.lastName);
               this.selectedUsers.push({id: user.id, name: user.firstName + '  ' + user.lastName});
             }
           }
-          if (this.assignment.costCenterId == user.costCenterId) {
+        if (this.assignment.costCenterId == user.costCenterId
+          && this.assignment.businessUnitId == user.businessUnitId) {
             list.push({id: user.id, name: user.firstName + '  ' + user.lastName});
           }
-        } else {
-          list.push({id: user.id, name: user.firstName + '  ' + user.lastName});
         }
       }
+      this.createSupervisorList(data);
       this.usersList = list;
       console.log(this.usersList);
       this.setForm();
     });
     this.skillService.getCostCenters().subscribe(data => {
       this.costCenters = data;
+    });
+    this.skillService.getBusinessUnits().subscribe(data => {
+      this.businessUnits = data;
     });
     this.adminService.getAllSkills().subscribe(data => {
       console.log(data);
@@ -79,6 +86,7 @@ export class SkillAssignmentAddComponent implements OnInit, OnDestroy {
     if (history.state.data) {
       console.log(history.state.data);
       this.assignment = history.state.data;
+      this.generateUserList();
     }
     this.dropdownSettings = {
       singleSelection: false,
@@ -158,15 +166,33 @@ export class SkillAssignmentAddComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
-  onChangeCostCenter() {
+  generateUserList() {
     const list = [];
+    this.usersList = list;
+    this.selectedUsers = [];
+    if (!this.assignment.businessUnitId) {
+      this.toastr.error('Select business unit');
+      return;
+    }
+    if (!this.assignment.costCenterId) {
+      this.toastr.error('Select cost center');
+      return;
+    }
     for (const user of this.users) {
-      if (user.costCenterId == this.assignment.costCenterId) {
+      if (user.costCenterId == this.assignment.costCenterId
+        && user.businessUnitId == this.assignment.businessUnitId) {
         list.push({id: user.id, name: user.firstName + '  ' + user.lastName});
       }
     }
     this.usersList = list;
-    this.selectedUsers = [];
     this.setForm();
+  }
+
+  createSupervisorList(data: User[]) {
+    for (const user of data) {
+      if (user.role == Roles.Supervisor) {
+        this.supervisors.push(user);
+      }
+    }
   }
 }

@@ -16,6 +16,8 @@ import {AuthGuard} from './_gaurds/auth.gaurd';
 import {AdminUsersComponent} from './admin/User/home/admin-users.component';
 import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component';
 import {Roles} from './model/roles.enum';
+import {AnalysisComponent} from './skill/analysis/analysis.component';
+import {ValidationComponent} from './skill/validation/validation.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -67,6 +69,14 @@ const routes: Routes = [
   {
     path: 'training-report', component: TrainingReportComponent,
     canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser, Roles.Nurse]}
+  },
+  {
+    path: 'skill-analysis', component: AnalysisComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser, Roles.Nurse]}
+  },
+  {
+    path: 'skill-validation', component: ValidationComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]}
   },
   {path: 'login', component: LoginComponent},
 ];
