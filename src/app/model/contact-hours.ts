@@ -4,4 +4,5 @@ export class ContactHours {
   position: string;
   ceHrs: number;
   timePeriod: number;
+  licenseId: number;
 }

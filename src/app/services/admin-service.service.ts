@@ -7,6 +7,7 @@ import {User} from '../model/user';
 import {ContactHours} from '../model/contact-hours';
 import {environment} from '../../environments/environment';
 import {AuthenticationServiceService} from './authentication-service.service';
+import {License} from '../model/license';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,8 @@ export class AdminServiceService {
   getUsersUrl: string;
   createUserUrl: string;
   deleteUserUrl: string;
+  getAllCertificationsUrl: string;
+  getLicenseUrl: string;
 
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationServiceService) {
@@ -39,6 +42,8 @@ export class AdminServiceService {
     this.getUsersUrl = `${environment.apiUrl}/user_services/get_all_users`;
     this.createUserUrl = `${environment.apiUrl}/user_services/add_user`;
     this.deleteUserUrl = `${environment.apiUrl}/user_services/delete_user`;
+    this.getAllCertificationsUrl = `${environment.apiUrl}/ce/get-certification`;
+    this.getLicenseUrl = `${environment.apiUrl}/getLicenses`;
   }
 
   public getAllSkills(): Observable<Skill[]> {
@@ -85,7 +90,8 @@ export class AdminServiceService {
   }
 
   getCeHours(ce: ContactHours) {
-    const url = `${this.getCeHour}?state=${ce.state}&title=${ce.userTitle}&pos=${ce.position}`;
+    // const url = `${this.getCeHour}?state=${ce.state}&title=${ce.userTitle}&pos=${ce.position}`;
+    const url = `${this.getCeHour}?state=${ce.state}&licenseId=${ce.licenseId}`;
     return this.http.get(url);
   }
 
@@ -120,5 +126,26 @@ export class AdminServiceService {
     console.log(selectedUser);
     const url = `${this.deleteUserUrl}?id=${selectedUser.id}`;
     return this.http.delete(url, httpOptions);
+  }
+
+  getAllCertifications() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        token: this.authenticationService.currentUserValue.token
+      })
+    };
+    return this.http.get<any[]>(this.getAllCertificationsUrl, httpOptions);
+  }
+
+  getLicense() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        token: this.authenticationService.currentUserValue.token
+      })
+    };
+
+    return this.http.get<License[]>(this.getLicenseUrl, httpOptions);
   }
 }

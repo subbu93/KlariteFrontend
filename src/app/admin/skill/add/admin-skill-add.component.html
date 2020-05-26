@@ -20,10 +20,17 @@
                 type="text"></textarea>
     </div>
     <div class="form-group row">
-      <label class="col-sm-4 text-center" for="threshold">Threshold</label>
-      <input [(ngModel)]="skill.threshold" class="form-control input col-sm-5" id="threshold"
-             name="threshold"
-             placeholder="Enter threshold"
+      <label class="col-sm-4 text-center" for="validationThreshold">Validation Threshold</label>
+      <input [(ngModel)]="skill.validationThreshold" class="form-control input col-sm-5" id="validationThreshold"
+             name="validationThreshold"
+             placeholder="Enter validation threshold"
+             required type="number" min=0>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-center" for="totalThreshold">Total Threshold</label>
+      <input [(ngModel)]="skill.totalThreshold" class="form-control input col-sm-5" id="totalThreshold"
+             name="totalThreshold"
+             placeholder="Enter total threshold"
              required type="number" min=0>
     </div>
     <div class="form-group row">

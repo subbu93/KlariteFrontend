@@ -5,6 +5,7 @@ export class Episode {
   userId: number;
   date: Date;
   mrn: string;
-  audited: boolean;
+  status: string;
   episodes: SkillEpisode[];
+  comment: string;
 }

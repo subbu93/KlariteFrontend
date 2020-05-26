@@ -23,7 +23,7 @@
 .table {
   /*display: block;*/
   width: 70%;
-  height: 300px;
+  max-height: 300px;
   overflow: auto;
   text-align: center;
 }

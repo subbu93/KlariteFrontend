@@ -5,6 +5,8 @@ import {NavigationEnd, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ContactHours} from '../../model/contact-hours';
 import {HttpErrorResponse} from '@angular/common/http';
+import {element} from 'protractor';
+import {License} from '../../model/license';
 
 @Component({
   selector: 'app-contact-hours',
@@ -13,16 +15,16 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class ContactHoursComponent implements OnInit, OnDestroy {
   navigationSubscription;
-  states: string[] = ['Alaska', 'Alabama', 'Arkansas', 'American Samoa', 'Arizona', 'California', 'Colorado', 'Connecticut',
-    'District of Columbia', 'Delaware', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Iowa', 'Idaho', 'Illinois', 'Indiana',
-    'Kansas', 'Kentucky', 'Louisiana', 'Massachusetts', 'Maryland', 'Maine', 'Michigan', 'Minnesota', 'Missouri',
-    'Mississippi', 'Montana', 'North Carolina', ' North Dakota', 'Nebraska', 'New Hampshire', 'New Jersey', 'New Mexico', 'Nevada',
-    'New York', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota',
-    'Tennessee', 'Texas', 'Utah', 'Virginia', 'Virgin Islands', 'Vermont', 'Washington', 'Wisconsin', 'West Virginia',
-    'Wyoming'];
+  // states: string[] = ['Alaska', 'Alabama', 'Arkansas', 'American Samoa', 'Arizona', 'California', 'Colorado', 'Connecticut',
+  //   'District of Columbia', 'Delaware', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Iowa', 'Idaho', 'Illinois', 'Indiana',
+  //   'Kansas', 'Kentucky', 'Louisiana', 'Massachusetts', 'Maryland', 'Maine', 'Michigan', 'Minnesota', 'Missouri',
+  //   'Mississippi', 'Montana', 'North Carolina', ' North Dakota', 'Nebraska', 'New Hampshire', 'New Jersey', 'New Mexico', 'Nevada',
+  //   'New York', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota',
+  //   'Tennessee', 'Texas', 'Utah', 'Virginia', 'Virgin Islands', 'Vermont', 'Washington', 'Wisconsin', 'West Virginia',
+  //   'Wyoming'];
   ce: ContactHours = new ContactHours();
-  titles: string[] = ['Nurse', 'Supervisor'];
-  positions: string[] = ['NP', 'RN'];
+  displayDescription = '';
+  licenses: License[] = [];
 
   constructor(private adminService: AdminServiceService,
               private appComponent: AppComponent,
@@ -41,6 +43,10 @@ export class ContactHoursComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.adminService.getLicense().subscribe(data => {
+      console.log(data);
+      this.licenses = data;
+    });
   }
 
   ngOnDestroy(): void {
@@ -70,12 +76,22 @@ export class ContactHoursComponent implements OnInit, OnDestroy {
 
   getCeHours() {
     console.log('getCeHours');
+    this.ce.state = 'Ohio';
     // tslint:disable-next-line:triple-equals
-    if (this.ce.position != undefined && this.ce.state != undefined && this.ce.userTitle != undefined) {
+    if (this.ce.licenseId != undefined) {
+      // const val = this.ce.certificationId;
+      const filteredObj = this.licenses.find(e => e.id == this.ce.licenseId);
+      console.log(filteredObj);
+      this.displayDescription = filteredObj.description;
+    }
+    if (this.ce.licenseId != undefined && this.ce.state != undefined) {
       this.adminService.getCeHours(this.ce).subscribe((data: ContactHours) => {
         console.log(data);
         if (data != null) {
           this.ce = data;
+        } else {
+          this.ce.timePeriod = null;
+          this.ce.ceHrs = null;
         }
       });
     }

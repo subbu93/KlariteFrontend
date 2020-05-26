@@ -33,11 +33,11 @@ export class AnalysisComponent implements OnInit {
   showChart = false;
   selectedUser: User = new User();
   selectedSkill: Skill = new Skill();
-  episodes: Episode[];
+  episodes: any[];
 
   single: any[] = [];
 
-  view: any[] = [800, 300];
+  view: any[] = [600, 300];
 
   // options
   showXAxis = true;
@@ -70,8 +70,6 @@ export class AnalysisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = [{id: 1, content: 'Busy'}, {id: 2, content: 'overload'}];
-    this.displayedColumns = ['position', 'Content', 'Status'];
     this.skillService.getCostCenters().subscribe(data => {
       this.costCenters = data;
     });
@@ -124,10 +122,10 @@ export class AnalysisComponent implements OnInit {
         if (user.id in data && data[user.id].length > 0) {
           // @ts-ignore
           for (const skillDetails of data[user.id]) {
-            if (skill.id == skillDetails.id && skill.threshold <= skillDetails.episodeCount) {
+            if (skill.id == skillDetails.id && skill.totalThreshold <= skillDetails.episodeCount) {
               skillDataVal = 'Completed';
             } else if (skill.id == skillDetails.id && skillDetails.episodeCount > 0
-              && skill.threshold > skillDetails.episodeCount) {
+              && skill.totalThreshold > skillDetails.episodeCount) {
               skillDataVal = 'In Progress';
             } else if (skill.id == skillDetails.id) {
               skillDataVal = 'Assigned';
@@ -225,11 +223,40 @@ export class AnalysisComponent implements OnInit {
     this.skillService.getEpisodes(this.selectedUser.id, this.selectedSkill.id).subscribe(
       data => {
         console.log(data);
-        this.episodes = data;
+        // this.episodes = data;
+        this.episodes = this.generateEpisodeChartData(data);
         this.showEpisodeData = true;
         this.showChart = false;
         this.showTable = false;
       }
     );
+  }
+
+  generateEpisodeChartData(data: any[]) {
+    const returnValue = [];
+    for (const val of data) {
+      const temp = new Episode();
+      temp.mrn = val.mrn;
+      temp.date = val.date;
+      for (const episode of val.episodes) {
+        temp.comment = episode.comment;
+        if (episode.observed) {
+          const observer = this.users.find(e => e.id === episode.observerId);
+          if (episode.validated == true) {
+            temp.status = 'Episode has been Validated by ' +
+              observer.firstName + ' ' + observer.lastName;
+          } else if (episode.remediated == true) {
+            temp.status = 'Episode has been remediated by ' +
+              observer.firstName + ' ' + observer.lastName;
+          } else {
+            temp.status = 'Validation Pending';
+          }
+        } else {
+          temp.status = 'N/A';
+        }
+        returnValue.push(temp);
+      }
+    }
+    return returnValue;
   }
 }

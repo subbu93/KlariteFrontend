@@ -1,44 +1,41 @@
 <div class="my-5">
   <form #ceForm="ngForm">
     <div class="form-group row">
-      <label class="col-sm-4 text-center" for="stateSelection">State</label>
+      <label class="col-sm-4 text-right" for="stateSelection">State</label>
       <select class="form-control col-sm-5" id="stateSelection" required
-              (change)="getCeHours()"
-              [(ngModel)]="ce.state" name="skillTrainingPreRequisite">
-        <option *ngFor="let state of states"
-                [value]="state">{{state}}</option>
+              (change)="getCeHours()" name="skillTrainingPreRequisite">
+<!--              [(ngModel)]="ce.state" name="skillTrainingPreRequisite">-->
+<!--        <option *ngFor="let state of states"-->
+        <option value="Ohio">Ohio</option>
       </select>
     </div>
     <div class="form-group row">
-      <label class="col-sm-4 text-center" for="titleSelection">Title</label>
-      <select class="form-control col-sm-5" id="titleSelection" required
-              (change)="getCeHours()"
-              [(ngModel)]="ce.userTitle" name="skillTrainingPreRequisite">
-        <option *ngFor="let title of titles"
-                [value]="title">{{title}}</option>
-      </select>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 text-center" for="positionSelection">Position</label>
+      <label class="col-sm-4 text-right" for="positionSelection">License</label>
       <select class="form-control col-sm-5" id="positionSelection" required
               (change)="getCeHours()"
-              [(ngModel)]="ce.position" name="skillTrainingPreRequisite">
-        <option *ngFor="let position of positions"
-                [value]="position">{{position}}</option>
+              [(ngModel)]="ce.licenseId" name="skillTrainingPreRequisite">
+        <option *ngFor="let license of licenses"
+                [value]="license.id">{{license.name}}</option>
       </select>
     </div>
     <div class="form-group row">
-      <label class="col-sm-4 text-center" for="threshold">Contact hours per year</label>
+      <label class="col-sm-4 text-right" for="description">Description</label>
+      <label class="form-control col-sm-5" id="description">
+        {{displayDescription}}
+      </label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 text-right" for="threshold">Contact hours</label>
       <input [(ngModel)]="ce.ceHrs" class="form-control input col-sm-5" id="threshold"
              name="threshold"
              placeholder="Enter threshold hours"
              required type="number" min=0>
     </div>
     <div class="form-group row">
-      <label class="col-sm-4 text-center" for="threshold">Time period in years</label>
+      <label class="col-sm-4 text-right" for="threshold">Frequency of renewal (in years)</label>
       <input [(ngModel)]="ce.timePeriod" class="form-control input col-sm-5" id="time"
-             name="threshold"
-             placeholder="Enter Time"
+             name="time"
+             placeholder="Enter time period in years"
              required type="number" min=0>
     </div>
   </form>

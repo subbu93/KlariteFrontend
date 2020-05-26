@@ -1,4 +1,5 @@
 import {Roles} from './roles.enum';
+import {License} from './license';
 
 export class User {
   id: bigint;
@@ -16,4 +17,5 @@ export class User {
   trainingAttended: boolean;
   token: string;
   role: Roles;
+  licenseList: License[];
 }

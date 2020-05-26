@@ -46,6 +46,7 @@ export class ValidationComponent implements OnInit {
         console.log(data);
         if (data.length == 0) {
           this.showMsg = true;
+          this.showTable = false;
         }
         this.validationData = data;
         for (const row of data) {
@@ -76,7 +77,7 @@ export class ValidationComponent implements OnInit {
     console.log('createEpisodesTableData');
 
     for (const row of this.validationData) {
-      if (row.userId == this.selectedUser && row.mrn == this.selectedMrn) {
+      if (row.userId == this.selectedUser && row.mrn == this.selectedMrn && row.observed) {
         this.episodeTableData.push(row);
       }
     }
@@ -95,7 +96,7 @@ export class ValidationComponent implements OnInit {
     }, (err: HttpErrorResponse) => {
       if (err.status === 201) {
         this.ngOnInit();
-        // this.router.navigateByUrl('/skill-assignment');
+        this.toastr.success('Notification has been sent to ' + this.selectedUser);
       } else {
         this.toastr.error('Cannot store data');
       }

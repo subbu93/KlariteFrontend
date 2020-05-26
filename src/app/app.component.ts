@@ -62,11 +62,11 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log(response);
         if (response.status === 200) {
           localStorage.removeItem('currentUser');
+          sessionStorage.removeItem('currentUser');
+          this.router.navigateByUrl('/login');
+          this.login = false;
         }
       });
-    ;
-    this.router.navigateByUrl('/login');
-    this.login = false;
   }
 
   toggleNavbar() {

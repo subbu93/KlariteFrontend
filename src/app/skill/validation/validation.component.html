@@ -1,4 +1,6 @@
-<h1 *ngIf="showMsg">No Data Available</h1>
+<div *ngIf="showMsg" class="my-5 max_height_list over_flow">
+  <h1>No Data Available</h1>
+</div>
 <div *ngIf="!showMsg" class="my-5">
   <div class="form-group row">
     <label class="col-sm-4 text-center" for="user">Select User to Validate Skill</label>
@@ -23,22 +25,16 @@
       <thead class="thead-dark">
       <tr>
         <th scope="col">Skill Name</th>
-        <th scope="col">Date of Service</th>
+        <th scope="col">Date & Time of Service</th>
         <th scope="col">Status</th>
         <th scope="col">Comments</th>
       </tr>
       </thead>
       <tbody>
       <tr class="text-justify" *ngFor="let row of episodeTableData">
-        <td scope="row" class="text-justify">{{row.skillName}}</td>
-        <td scope="row" class="text-justify">{{row.date}}</td>
-        <td scope="row" class="text-justify">
-<!--          <input class="col-md-3" type="radio" value=true id="yes"-->
-<!--                 name="CE" [checked]="row.validate" (change)="row.validate=true">-->
-<!--          <label class="form-check-label" for="yes">Validate</label>-->
-<!--          <input class="col-md-3" type="radio" value=true id="no"-->
-<!--                 name="CE" [checked]="!row.validate" (change)="row.validate=false">-->
-<!--          <label class="form-check-label" for="no">Remediate</label>-->
+        <td scope="row" class="text-center">{{row.skillName}}</td>
+        <td scope="row" class="text-center">{{row.date}}</td>
+        <td scope="row" class="text-center">
           <input type="radio" value=true [checked]="row.validate"
                  (change)="row.validated = true">Validate
           <input type="radio" value=false [checked]="row.remediate"

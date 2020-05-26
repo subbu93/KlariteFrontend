@@ -18,10 +18,12 @@ import {AdminUsersAddComponent} from './admin/User/add/admin-users-add.component
 import {Roles} from './model/roles.enum';
 import {AnalysisComponent} from './skill/analysis/analysis.component';
 import {ValidationComponent} from './skill/validation/validation.component';
+import {ReportComponent} from './Certification/report/report.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser, Roles.Nurse]}},
   {
     path: 'admin-skill', component: AdminSkillComponent,
     canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]}
@@ -77,6 +79,10 @@ const routes: Routes = [
   {
     path: 'skill-validation', component: ValidationComponent,
     canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator]}
+  },
+  {
+    path: 'certification-report', component: ReportComponent,
+    canActivate: [AuthGuard], data: {roles: [Roles.Supervisor, Roles.SiteAdministrator, Roles.SuperUser, Roles.Nurse]}
   },
   {path: 'login', component: LoginComponent},
 ];

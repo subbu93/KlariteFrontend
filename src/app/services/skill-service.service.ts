@@ -7,6 +7,7 @@ import {BusinessUnit} from '../model/business-unit';
 import {environment} from '../../environments/environment';
 import {AuthenticationServiceService} from './authentication-service.service';
 import {Episode} from '../model/episode';
+import {CeReport} from '../model/ce-report';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class SkillServiceService {
   getEpisodesUrl: string;
   getValidationDataUrl: string;
   saveValidationDataUrl: string;
+  getCeReportUrl: string;
 
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationServiceService) {
@@ -37,6 +39,7 @@ export class SkillServiceService {
     this.getEpisodesUrl = `${environment.apiUrl}/skill/get_all_episodes`;
     this.getValidationDataUrl = `${environment.apiUrl}/skill/get-skill-validation`;
     this.saveValidationDataUrl = `${environment.apiUrl}/skill/store-skill-validation`;
+    this.getCeReportUrl = `${environment.apiUrl}/ce/get-ce-report`;
   }
 
   deleteAssignment(selected: SkillAssignment) {
@@ -97,5 +100,16 @@ export class SkillServiceService {
   saveValidationData(validationData: any[]) {
     const headers = {'Content-Type': 'application/json'};
     return this.http.post(this.saveValidationDataUrl, validationData, {headers});
+  }
+
+  getCeReport(businessUnitId: number, costCenterId: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        token: this.authenticationService.currentUserValue.token
+      })
+    };
+    const url = `${this.getCeReportUrl}?businessUnitId=${businessUnitId}&costCenterId=${costCenterId}`;
+    return this.http.get<CeReport[]>(url, httpOptions);
   }
 }

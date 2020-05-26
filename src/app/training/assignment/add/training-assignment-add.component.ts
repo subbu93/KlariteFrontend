@@ -217,7 +217,7 @@ export class TrainingAssignmentAddComponent implements OnInit, OnDestroy {
 
   private addUuid() {
     if (this.assignment.assignmentId == null) {
-      this.assignment.uuid = uuidv4();
+      this.assignment.uuid = (Math.floor(100000 + Math.random() * 900000)).toString();
     }
   }
 }

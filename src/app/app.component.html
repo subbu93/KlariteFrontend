@@ -27,7 +27,7 @@
             <button ngbDropdownItem [routerLink]="['skill-validation']"
                     class="bg-dark text-light" [hidden]="!showAssignment">Validation
             </button>
-            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Report</button>
+<!--            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Report</button>-->
           </div>
         </li>
         <li ngbDropdown class="nav-item dropdown">
@@ -42,8 +42,8 @@
         <li ngbDropdown class="nav-item dropdown">
           <a href (click)="false" class="nav-link" ngbDropdownToggle>Certification</a>
           <div ngbDropdownMenu class="bg-dark no-border">
-            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">CE/Reports</button>
-            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Search</button>
+            <button ngbDropdownItem [routerLink]="['certification-report']" class="bg-dark text-light">CE/Reports</button>
+<!--            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Search</button>-->
           </div>
         </li>
         <li ngbDropdown class="nav-item dropdown" [hidden]="!showAdmin">
@@ -51,7 +51,7 @@
           <div ngbDropdownMenu class="bg-dark no-border">
             <button ngbDropdownItem [routerLink]="['admin-skill']" class="bg-dark text-light">Skills</button>
             <button ngbDropdownItem [routerLink]="['admin-training']" class="bg-dark text-light">Training</button>
-            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Certification</button>
+<!--            <button disabled ngbDropdownItem class="bg-dark text-light text-muted">Certification</button>-->
             <!--          <button ngbDropdownItem [routerLink]="['admin-ce']" class = "bg-dark text-light">CE</button>-->
             <button ngbDropdownItem [routerLink]="['admin-ce']" class="bg-dark text-light">Contact Hours</button>
             <button ngbDropdownItem [routerLink]="['admin-users']" class="bg-dark text-light">Users</button>

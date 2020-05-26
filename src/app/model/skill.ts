@@ -2,9 +2,10 @@ export class Skill {
   id: number;
   skillName: string;
   description: string;
-  threshold: number;
+  totalThreshold: number;
   skillTrainingPreRequisite: string;
   isSelected: boolean;
   trainingId: number;
   episodeCount: number;
+  validationThreshold: number;
 }
