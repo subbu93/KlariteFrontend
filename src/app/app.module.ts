@@ -30,6 +30,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { CommentNull } from './model/comment-null';
 import { ValidationComponent } from './skill/validation/validation.component';
 import { ReportComponent } from './Certification/report/report.component';
+import { DateTimePipe } from './model/date-time.pipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ReportComponent } from './Certification/report/report.component';
     CommentNull,
     ValidationComponent,
     ReportComponent,
+    DateTimePipe,
   ],
   imports: [
     BrowserModule,

@@ -100,7 +100,7 @@
       <tbody>
       <tr class="text-justify" *ngFor="let row of episodes">
         <td scope="row" class="text-center">{{row.mrn}}</td>
-        <td scope="row" class="text-center">{{row.date}}</td>
+        <td scope="row" class="text-center">{{row.date | dateTime}}</td>
         <td scope="row" class="text-center">{{row.status}}</td>
         <td scope="row" class="text-center">{{row.comment | nullCommentPipe}}</td>
       </tr>
