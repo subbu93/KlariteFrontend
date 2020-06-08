@@ -47,16 +47,17 @@ export class ValidationComponent implements OnInit {
         if (data.length == 0) {
           this.showMsg = true;
           this.showTable = false;
-        }
-        this.validationData = data;
-        for (const row of data) {
-          const found = this.users.some(el => el.id === row.userId);
-          if (!found) {
-            this.users.push({id: row.userId, name: row.firstName + ' ' + row.lastName});
+        } else {
+          this.validationData = data;
+          for (const row of data) {
+            const found = this.users.some(el => el.id === row.userId);
+            if (!found) {
+              this.users.push({id: row.userId, name: row.firstName + ' ' + row.lastName});
+            }
           }
-        }
-        if (this.selectedUser != undefined && this.selectedMrn != undefined) {
-          this.createEpisodesTableData();
+          if (this.selectedUser != undefined && this.selectedMrn != undefined) {
+            this.createEpisodesTableData();
+          }
         }
       });
   }
@@ -95,6 +96,7 @@ export class ValidationComponent implements OnInit {
       console.log('response: ' + response);
     }, (err: HttpErrorResponse) => {
       if (err.status === 201) {
+        this.showTable = false;
         this.ngOnInit();
         this.toastr.success('Notification has been sent to ' + this.selectedUser);
       } else {

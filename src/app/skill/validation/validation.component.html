@@ -1,5 +1,7 @@
 <div *ngIf="showMsg" class="my-5 max_height_list over_flow">
-  <h1>No Data Available</h1>
+  <div class="form-group row">
+    <h1 class="col-sm-12 text-center">No Pending Validation</h1>
+  </div>
 </div>
 <div *ngIf="!showMsg" class="my-5">
   <div class="form-group row">
@@ -19,9 +21,9 @@
     </select>
   </div>
 </div>
-<div class="my-5">
+<div [hidden]="!showTable" class="my-5">
   <div class="d-flex justify-content-center">
-    <table [hidden]="!showTable" class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered">
       <thead class="thead-dark">
       <tr>
         <th scope="col">Skill Name</th>
@@ -35,10 +37,10 @@
         <td scope="row" class="text-center">{{row.skillName}}</td>
         <td scope="row" class="text-center">{{row.date}}</td>
         <td scope="row" class="text-center">
-          <input type="radio" value=true [checked]="row.validate"
-                 (change)="row.validated = true">Validate
-          <input type="radio" value=false [checked]="row.remediate"
-                 (change)="row.remediated = true">Remediate
+          <input type="radio" value=true [checked]="row.validated"
+                 (change)="row.validated = true; row.remediated = false">Validate
+          <input type="radio" value=false [checked]="row.remediated"
+                 (change)="row.remediated = true; row.validated = false">Remediate
         </td>
         <td scope="row" class="text-justify">
           <input [(ngModel)]="row.comment" class="col-md-12" type="text">

@@ -17,8 +17,6 @@ import {Episode} from '../../model/episode';
 export class AnalysisComponent implements OnInit {
   private navigationSubscription;
   row = [];
-  displayedColumns: string[];
-  dataSource = [];
   skills: Skill[];
   users: User[];
   businessUnitId: number;
@@ -89,7 +87,6 @@ export class AnalysisComponent implements OnInit {
   }
 
   onGenerate() {
-    this.showTable = false;
     this.skillService.getAnalysisData(this.costCenterId, this.businessUnitId).subscribe(data => {
       this.analysisData = data;
       if (Object.keys(data).length > 0) {
@@ -99,11 +96,10 @@ export class AnalysisComponent implements OnInit {
         this.tableAnalysisData = [];
         this.filteredUser();
         this.generateTableData(data);
+      } else {
+        this.showMsg = true;
       }
     });
-    if (!this.showTable) {
-      this.showMsg = true;
-    }
   }
 
   generateTableData(data: Object) {
